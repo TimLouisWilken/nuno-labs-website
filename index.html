@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nuno Labs – Kurzfristprognosen für Solarparks</title>
+<link rel="icon" href="assets/logo.svg">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css">
+<style>
+:root{--bg:#f3f0ea;--ink:#141312;--muted:#7a756d;--line:rgba(20,19,18,.16);--accent:#F26938;--card:#fbf9f5}
+.story{position:relative;height:560vh}
+.stage{position:sticky;top:0;height:100vh;min-height:560px;overflow:hidden;background:var(--bg)}
+.world{position:absolute;left:50%;top:50%;width:1920px;height:1080px;margin:-540px 0 0 -960px;transform-origin:50% 50%}
+.world canvas{position:absolute;left:0;top:0;width:1920px;height:1080px}
+.world>svg{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:visible;pointer-events:none}
+.ret{stroke:var(--ink);stroke-width:1;opacity:.13}
+.ring{fill:none;stroke:var(--accent);stroke-width:1.6}.tick{stroke:var(--accent);stroke-width:1.4}
+.disc{fill:var(--accent)}
+.sunlab{fill:var(--ink);font-size:17px;font-weight:500}
+.trk{stroke:var(--accent);stroke-width:2;stroke-dasharray:5 9;fill:none;transition:opacity .4s}
+.det{position:absolute;left:0;top:0;opacity:0;transition:opacity .5s;will-change:transform}
+.det.on{opacity:1}
+.det i{position:absolute;width:30px;height:30px;border:1.5px solid var(--ink)}
+.det i:nth-child(1){left:0;top:0;border-right:0;border-bottom:0}.det i:nth-child(2){right:0;top:0;border-left:0;border-bottom:0}
+.det i:nth-child(3){right:0;bottom:0;border-left:0;border-top:0}.det i:nth-child(4){left:0;bottom:0;border-right:0;border-top:0}
+.det b,.det span{position:absolute;bottom:calc(100% + 9px);font-size:17px;font-weight:500;white-space:nowrap;font-variant-numeric:tabular-nums;background:var(--bg);padding:1px 6px}
+.det b{left:-6px}.det span{right:-6px;color:var(--muted);opacity:0;transition:opacity .4s}
+.det.cls span{opacity:1}.det.hit i{border-color:var(--accent)}.det.hit span{color:var(--accent)}
+
+.nav{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;gap:30px;padding:22px clamp(18px,2.6vw,38px);font-size:14px;z-index:5}
+.brand{display:flex;align-items:center;gap:9px;font-weight:600;letter-spacing:-.02em;font-size:17px;margin-right:auto}.brand svg{width:26px;height:26px}
+.nav a:not(.brand):not(.cta){color:var(--muted)}.nav a:hover{color:var(--ink)!important}
+.nav .cta{background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;font-weight:500}
+.meta{position:absolute;left:clamp(18px,2.6vw,38px);top:84px;z-index:5;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-variant-numeric:tabular-nums;display:flex;gap:22px}
+.meta b{font-weight:500;color:var(--ink)}
+.copy{position:absolute;left:clamp(18px,2.6vw,38px);bottom:clamp(30px,5vh,52px);z-index:5;width:min(640px,56vw);height:250px}
+.copy div{position:absolute;left:0;bottom:0;opacity:0;transform:translateY(14px);transition:opacity .55s,transform .55s;pointer-events:none}
+.copy div.on{opacity:1;transform:none}
+.copy small{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:14px;font-variant-numeric:tabular-nums}
+.copy h1,.copy h2{font-size:clamp(28px,3.6vw,54px);font-weight:500;letter-spacing:-.035em;line-height:1.05;margin:0}
+.copy p{font-size:16px;color:var(--muted);margin-top:18px;max-width:30em}
+.hud{position:absolute;right:clamp(18px,2.6vw,38px);bottom:clamp(30px,5vh,52px);z-index:5;width:min(380px,36vw);background:var(--card);border-radius:10px;padding:16px 18px 13px;box-shadow:0 0 0 1px var(--line),0 30px 50px -34px rgba(20,19,18,.45)}
+.hud header{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;color:var(--muted)}
+.hud header b{font-size:28px;font-weight:500;letter-spacing:-.035em;color:var(--ink);font-variant-numeric:tabular-nums}.hud header b em{font-style:normal;font-size:12.5px;color:var(--muted);margin-left:4px;letter-spacing:0}
+.pk{display:grid;grid-template-columns:repeat(28,1fr);gap:3px;margin:12px 0 4px}.pk i{aspect-ratio:.62;background:var(--ink);border-radius:1px;transition:opacity .2s linear}
+.hud svg{width:100%;height:auto;display:block;margin-top:8px;overflow:visible}
+.hud .m{fill:none;stroke:var(--ink);stroke-width:2;stroke-linejoin:round}.hud .f{fill:none;stroke:var(--accent);stroke-width:2;stroke-linejoin:round}
+.hud .n{stroke:var(--ink);opacity:.3;stroke-width:1}.hud .g{stroke:var(--line);stroke-width:1}.hud .d{fill:var(--accent);stroke:var(--card);stroke-width:2}
+.hud footer{display:flex;gap:16px;font-size:11.5px;color:var(--muted);margin-top:6px}.hud footer span::before{content:"";display:inline-block;width:12px;height:2px;background:var(--ink);margin-right:6px;vertical-align:middle}.hud footer span+span::before{background:var(--accent)}
+.prog{position:absolute;left:clamp(18px,2.6vw,38px);right:clamp(18px,2.6vw,38px);bottom:14px;height:1px;background:var(--line);z-index:5}.prog i{display:block;height:3px;margin-top:-1px;width:100%;background:var(--ink);transform-origin:0 50%;transform:scaleX(0)}
+.hint{position:absolute;right:clamp(18px,2.6vw,38px);top:84px;z-index:5;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);transition:opacity .4s;display:flex;gap:10px;align-items:center}
+.hint::after{content:"";width:1px;height:26px;background:var(--ink);animation:nudge 1.6s ease-in-out infinite}@keyframes nudge{50%{transform:translateY(8px)}}
+
+.wrap{max-width:1320px;margin:0 auto;padding:0 clamp(20px,3vw,44px)}
+.say{padding:clamp(90px,14vh,160px) 0 clamp(60px,9vh,100px);display:grid;grid-template-columns:1.2fr .8fr;gap:40px}
+.say h2{font-size:clamp(28px,3.4vw,50px);font-weight:500;letter-spacing:-.035em;line-height:1.08;margin:0}
+.say p{font-size:18px;color:var(--muted);max-width:24em;align-self:end;justify-self:end}
+.three{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink)}
+.three div{padding:20px 26px 10px 0}.three div+div{padding-left:26px;border-left:1px solid var(--line)}
+.three small{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.three h3{font-size:clamp(22px,2.2vw,30px);font-weight:500;letter-spacing:-.03em;line-height:1.12;margin:54px 0 10px}.three p{color:var(--muted);font-size:15.5px;max-width:25em}
+.sol{padding-top:clamp(90px,13vh,150px)}.sol h2{font-size:clamp(26px,3.2vw,46px);font-weight:500;letter-spacing:-.035em;line-height:1.08;margin:0 0 40px;max-width:15em}
+.sol>div{border-top:1px solid var(--ink)}
+.lrow{display:grid;grid-template-columns:120px minmax(0,1fr) minmax(0,1.1fr) 20px;gap:22px;align-items:center;padding:24px 0;border-bottom:1px solid var(--line);transition:padding .35s cubic-bezier(.2,.7,.2,1)}
+.lrow small{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}.lrow h3{font-size:clamp(22px,2.4vw,34px);font-weight:500;letter-spacing:-.035em;margin:0}.lrow p{font-size:15px;color:var(--muted);max-width:30em}
+.lrow svg{width:15px;height:15px;opacity:.35;transition:.3s}.lrow:hover{padding-left:12px}.lrow:hover svg{opacity:1;color:var(--accent);transform:translateX(4px)}
+@media(max-width:860px){.lrow{grid-template-columns:1fr 18px}.lrow small{display:none}.lrow p{grid-column:1}}
+.end{margin-top:clamp(80px,12vh,130px);border-top:1px solid var(--line);padding:clamp(50px,8vh,90px) 0 40px;display:flex;gap:30px;align-items:end;flex-wrap:wrap}
+.end h2{font-size:clamp(28px,3.6vw,54px);font-weight:500;letter-spacing:-.035em;line-height:1.05;margin:0 auto 0 0;max-width:13em}
+.btn{display:inline-flex;align-items:center;height:48px;padding:0 22px;border-radius:8px;background:var(--ink);color:var(--bg);font-size:15px;font-weight:500}
+.cred{font-size:12px;color:var(--muted);padding:0 0 36px}
+@media(max-width:860px){.nav a:not(.brand):not(.cta){display:none}.say,.three{grid-template-columns:1fr}.three div+div{border-left:0;padding-left:0;border-top:1px solid var(--line)}.say p{justify-self:start}.copy{width:auto;right:18px;bottom:150px}.hud{width:auto;left:18px;right:18px;padding:10px 14px}.hud svg,.hud footer,.pk{display:none}.meta span:nth-child(n+2),.hint{display:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><filter id="lb" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3.2"/></filter></defs></svg>
+
+<section class="story" id="story">
+  <div class="stage">
+    <div class="world" id="world">
+      <canvas id="cv"></canvas>
+      <svg id="ov">
+        <line class="ret" x1="-400" x2="2320" y1="430" y2="430"/><line class="ret" x1="1220" x2="1220" y1="-200" y2="1280"/>
+        <g id="sun"><circle class="disc" id="disc" cx="1220" cy="430" r="30"/><circle class="ring" cx="1220" cy="430" r="62"/><g id="ticks"></g></g>
+        <text class="sunlab" x="1300" y="396">Sonne</text>
+        <path class="trk" id="trk" style="opacity:0"/><path class="trk" id="trk2" style="opacity:0"/>
+      </svg>
+    </div>
+    <header class="nav">
+      <a class="brand" href="#"><svg viewBox="0 0 100 100"><g filter="url(#lb)"><circle cx="33" cy="62" r="22" fill="#F26938"/><circle cx="67" cy="60" r="22" fill="#0097B2"/><circle cx="50" cy="38" r="23" fill="#F38D03"/></g></svg>Nuno Labs</a>
+      <a href="#technik">Technik</a><a href="#loesungen">Lösungen</a><a href="karriere.html">Karriere</a><a class="cta" href="mailto:hello@nuno-labs.de">Demo anfragen</a>
+    </header>
+    <div class="meta"><span>Himmelskamera · <b>Sichtfeld</b></span><span>Zeit <b id="clk">12:14:00</b></span><span>Erfasst <b id="cnt">0</b></span></div>
+    <span class="hint" id="hint">Scrollen lässt die Zeit laufen</span>
+    <div class="copy" id="copy">
+      <div><small>Nuno Labs · Solar-Nowcasting</small><h1>Wir sagen voraus, was Ihr Solarpark in 15 Minuten liefert.</h1></div>
+      <div><small>01 · Erkennen</small><h2>Die Kamera am Park erfasst jede Wolke am Himmel.</h2><p><span>Form, Größe, Richtung und Tempo, Bild für Bild.</span></p></div>
+      <div><small>02 · Verfolgen</small><h2>Das Modell berechnet, welche Wolke die Sonne trifft.</h2><p><span>Die meisten ziehen vorbei. Diese eine nicht.</span></p></div>
+      <div><small>03 · Vorhersagen · Schatten in <span id="cd">02:00</span></small><h2>Der Einbruch steht in der Prognose, der Park liefert noch voll.</h2></div>
+      <div><small>04 · Eintreffen</small><h2>Die Wolke steht vor der Sonne. Die Leistung fällt wie vorhergesagt.</h2></div>
+      <div><small>Und weiter</small><h2>Die Sonne ist wieder frei. Die nächste Wolke ist schon erfasst.</h2></div>
+    </div>
+    <aside class="hud">
+      <header><span>Solarpark · Leistung</span><b><span id="mw">38,6</span><em>MW</em></b></header>
+      <div class="pk" id="pk"></div>
+      <svg viewBox="0 0 320 84"><line class="g" x1="0" x2="320" y1="8" y2="8"/><line class="g" x1="0" x2="320" y1="78" y2="78"/><path class="f" id="fc"/><path class="m" id="me"/><line class="n" id="nowl" y1="0" y2="82"/><circle class="d" id="dot" r="4.5"/></svg>
+      <footer><span>Gemessen</span><span>Nuno-Prognose</span></footer>
+    </aside>
+    <div class="prog"><i id="bar"></i></div>
+  </div>
+</section>
+
+<div class="wrap">
+  <section class="say" id="technik">
+    <h2 data-reveal>Nuno Labs baut Kurzfristprognosen für Solarparks, mit einer eigenen Kamera am Standort.</h2>
+    <p data-reveal>Wettermodelle kennen den Tag. Wir kennen die Wolke, die in sieben Minuten über Ihrem Park steht.</p>
+  </section>
+  <div class="three">
+    <div data-reveal><small>Sensor-Hub</small><h3>Eine Kamera, die den ganzen Himmel sieht.</h3><p>Der Sensor-Hub steht am Park und beobachtet den Himmel von Horizont zu Horizont.</p></div>
+    <div data-reveal style="--d:.08s"><small>Modell</small><h3>Aus Wolken werden Megawatt.</h3><p>Das Modell erkennt jede Wolke, verfolgt ihre Zugbahn und berechnet, wann ihr Schatten die Module trifft.</p></div>
+    <div data-reveal style="--d:.16s"><small>Prognose</small><h3>Die Zahl kommt dort an, wo Sie entscheiden.</h3><p>Leistung je Viertelstunde, bis zwei Stunden voraus, per API in Ihr Handels- oder Leitsystem.</p></div>
+  </div>
+  <section class="sol" id="loesungen"><h2 data-reveal>Vier Branchen, eine Frage: Was liefert die Sonne gleich?</h2><div><a class="lrow" href="direktvermarkter.html" data-reveal><small>Handel</small><h3>Direktvermarkter</h3><p>Handeln Sie die Rampe, statt sie als Ausgleichsenergie zu bezahlen.</p><svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="lrow" href="anlagenbetreiber.html" data-reveal><small>Erzeugung</small><h3>Anlagenbetreiber</h3><p>Derselbe Park, besser prognostiziert, besser vermarktet.</p><svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="lrow" href="netzbetreiber.html" data-reveal><small>Netz</small><h3>Netzbetreiber</h3><p>Die Einspeisung der nächsten zwei Stunden, Park für Park.</p><svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="lrow" href="batteriespeicher.html" data-reveal><small>Speicher</small><h3>Batteriespeicher</h3><p>Co-Location fahren, als wüssten Sie, was die Sonne vorhat.</p><svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></section>
+  <section class="end"><h2>Sehen Sie die Prognose an einem Ihrer eigenen Parks.</h2><a class="btn" href="mailto:hello@nuno-labs.de">Demo anfragen</a></section>
+  <p class="cred">Nuno Labs · TUM Spin-off, München · gefördert durch EXIST. Die Szene ist eine Illustration; Zeiten und Leistung sind Beispielwerte.</p>
+</div>
+
+<script src="assets/halftone-clouds.js"></script>
+<script>
+(function () {
+  const SUN = [1220, 430], PMAX = 38.6, SP = 13, RMAX = 6.1, INK = '#141312', OR = '#F26938';
+  const ss = (a, b, v) => { const t = Math.min(1, Math.max(0, (v - a) / (b - a))); return t * t * (3 - 2 * t); };
+  const mmss = s => String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(Math.floor(s % 60)).padStart(2, '0');
+  const MAPS = {}; for (const k in NUNO_CLOUDS) { const m = NUNO_CLOUDS[k], b = atob(m.d), d = new Float32Array(b.length); for (let i = 0; i < b.length; i++) d[i] = b.charCodeAt(i) / 255; MAPS[k] = { w: m.w, h: m.h, r: m.r, d }; }
+  const C = [
+    { id: '01', m: 'b', w: 360, flip: 0, x0: 300, vx: 2250, y0: -30, vy: 30, det: .07, cls: .19, hit: 0 },
+    { id: '02', m: 'a', w: 600, flip: 0, x0: -690, vx: 2600, y0: 160, vy: 60, det: .13, cls: .30, hit: 1, t0: .53, t1: .75 },
+    { id: '03', m: 'b', w: 330, flip: 1, x0: -1500, vx: 2500, y0: -10, vy: 20, det: .62, cls: .74, hit: 0 },
+    { id: '04', m: 'a', w: 540, flip: 1, x0: -2100, vx: 2700, y0: 185, vy: 50, det: .84, cls: .93, hit: 1, t0: 1.18, t1: 1.4 },
+    { id: '', m: 'c', w: 150, flip: 0, x0: -260, vx: 2400, y0: 640, vy: -30, det: 9, cls: 9, hit: 0 }
+  ];
+  const $ = id => document.getElementById(id), world = $('world'), cv = $('cv'), ctx = cv.getContext('2d'), story = $('story');
+  C.forEach(c => { c.h = c.w * MAPS[c.m].r; if (!c.id) return; const d = document.createElement('div'); d.className = 'det' + (c.hit ? ' hit' : ''); d.style.width = (c.w + 24) + 'px'; d.style.height = (c.h + 24) + 'px'; d.innerHTML = `<i></i><i></i><i></i><i></i><b>Wolke ${c.id} · 9,4 m/s</b><span></span>`; world.appendChild(d); c.d = d; c.s = d.querySelector('span'); });
+  let tk = ''; for (let a = 0; a < 360; a += 15) { const r = a * Math.PI / 180, r0 = 74, r1 = a % 45 ? 82 : 92; tk += `<line class="tick" x1="${SUN[0] + r0 * Math.cos(r)}" y1="${SUN[1] + r0 * Math.sin(r)}" x2="${SUN[0] + r1 * Math.cos(r)}" y2="${SUN[1] + r1 * Math.sin(r)}"/>`; } $('ticks').innerHTML = tk;
+  const pk = $('pk'), pan = []; for (let i = 0; i < 28; i++) { const e = document.createElement('i'); pk.appendChild(e); pan.push(e); }
+  const cover = p => { const c = C[1]; return ss(c.t0, c.t0 + .07, p) * (1 - ss(c.t1 - .07, c.t1, p)); };
+  const power = p => PMAX * (1 - .7 * cover(p)) + .25 * Math.sin(p * 90) + .15 * Math.sin(p * 37);
+  const gx = p => 4 + 312 * p, gy = v => 78 - (v / 42) * 70;
+  const copy = [...document.querySelectorAll('#copy>div')], bounds = [.10, .26, .44, .56, .80, 2];
+  let K = 1, target = 0, p = 0, t = 0;
+  function fit() { const s = Math.max(innerWidth / 1920, innerHeight / 1080); world.style.transform = 'scale(' + s + ')'; K = Math.min(1.6, Math.max(.7, s * (devicePixelRatio || 1))); cv.width = 1920 * K; cv.height = 1080 * K; }
+  function dens(c, wx, wy) {
+    const m = MAPS[c.m]; let u = (wx - c.x) / c.w; const v = (wy - c.y) / c.h; if (u < 0 || u > 1 || v < 0 || v > 1) return 0; if (c.flip) u = 1 - u;
+    const fx = u * (m.w - 1), fy = v * (m.h - 1), x0 = fx | 0, y0 = fy | 0, x1 = Math.min(m.w - 1, x0 + 1), y1 = Math.min(m.h - 1, y0 + 1), ax = fx - x0, ay = fy - y0, d = m.d;
+    return (d[y0 * m.w + x0] * (1 - ax) + d[y0 * m.w + x1] * ax) * (1 - ay) + (d[y1 * m.w + x0] * (1 - ax) + d[y1 * m.w + x1] * ax) * ay;
+  }
+  const ROW = SP * .866;
+  function draw() {
+    t += .016; const cvr = cover(p);
+    C.forEach((c, i) => { c.x = c.x0 + p * c.vx + 8 * Math.sin(t * .35 + i * 2); c.y = c.y0 + p * c.vy + 5 * Math.sin(t * .28 + i); });
+    ctx.setTransform(K, 0, 0, K, 0, 0); ctx.clearRect(0, 0, 1920, 1080);
+    /* Grundraster + Sonnenhalo als Punkte */
+    ctx.fillStyle = 'rgba(20,19,18,.2)'; ctx.beginPath();
+    const halo = [];
+    for (let j = 0, y = 0; y < 1080; j++, y = j * ROW) for (let x = (j & 1) * SP / 2; x < 1920; x += SP) {
+      const dx = x - SUN[0], dy = y - SUN[1], q = dx * dx + dy * dy;
+      if (q < 250000) { const r = 4.4 * Math.exp(-q / 38000) * (1 - .78 * cvr); if (r > .75 && q > 4300) { halo.push(x, y, r); continue; } if (q <= 4300) continue; }
+      ctx.moveTo(x + .8, y); ctx.arc(x, y, .8, 0, 6.283);
+    }
+    ctx.fill();
+    ctx.fillStyle = OR; ctx.beginPath(); for (let i = 0; i < halo.length; i += 3) { ctx.moveTo(halo[i] + halo[i + 2], halo[i + 1]); ctx.arc(halo[i], halo[i + 1], halo[i + 2], 0, 6.283); } ctx.fill();
+    /* Wolken als Rasterpunkte; nahe der Sonne orange hinterleuchtet */
+    const lit = [];
+    ctx.fillStyle = INK; ctx.beginPath();
+    for (const c of C) {
+      if (c.x > 1920 || c.x + c.w < 0) continue;
+      const j0 = Math.max(0, Math.floor(c.y / ROW)), j1 = Math.min(Math.floor(1080 / ROW), Math.ceil((c.y + c.h) / ROW));
+      for (let j = j0; j <= j1; j++) { const y = j * ROW, off = (j & 1) * SP / 2; let x = Math.ceil((Math.max(0, c.x) - off) / SP) * SP + off;
+        for (; x < Math.min(1920, c.x + c.w); x += SP) { const d = dens(c, x, y); if (d < .035) continue; const r = RMAX * Math.pow(d, .62), dx = x - SUN[0], dy = y - SUN[1];
+          if (c.hit && dx * dx + dy * dy < 9500) { lit.push(x, y, r); continue; }
+          ctx.moveTo(x + r, y); ctx.arc(x, y, r, 0, 6.283); } }
+    }
+    ctx.fill();
+    ctx.fillStyle = OR; ctx.beginPath(); for (let i = 0; i < lit.length; i += 3) { ctx.moveTo(lit[i] + lit[i + 2], lit[i + 1]); ctx.arc(lit[i], lit[i + 1], lit[i + 2], 0, 6.283); } ctx.fill();
+    /* Erkennung */
+    let n = 0;
+    C.forEach(c => { if (!c.d) return; const cx = c.x + c.w / 2, vis = cx > -80 && cx < 2000, on = p >= c.det && vis; if (p >= c.det) n++;
+      c.d.style.transform = `translate3d(${(c.x - 12).toFixed(1)}px,${(c.y - 12).toFixed(1)}px,0)`; c.d.classList.toggle('on', on); c.d.classList.toggle('cls', p >= c.cls);
+      let txt = 'zieht vorbei'; if (c.hit) txt = p < c.t0 ? 'trifft die Sonne in ' + mmss((c.t0 - p) * 1500) : p < c.t1 ? 'verdeckt die Sonne' : 'durchgezogen'; if (c.s.textContent !== txt) c.s.textContent = txt; });
+    const a = C[1], b = C[3], line = (c, el) => { const on = p >= c.cls && p < c.t0 + .02; el.style.opacity = on ? 1 : 0; if (on) el.setAttribute('d', `M${(c.x + c.w * .8).toFixed(0)} ${(c.y + c.h * .55).toFixed(0)}L${SUN[0] - 98} ${SUN[1]}`); };
+    line(a, $('trk')); line(b, $('trk2'));
+    $('disc').style.opacity = 1 - cvr; 
+    const k = bounds.findIndex(v => p < v); copy.forEach((d, i) => d.classList.toggle('on', i === k));
+    $('hint').style.opacity = p < .03 ? 1 : 0; $('bar').style.transform = 'scaleX(' + p.toFixed(4) + ')';
+    $('mw').textContent = power(p).toFixed(1).replace('.', ','); $('cd').textContent = mmss(Math.max(0, (a.t0 - p) * 1500));
+    const sec = 12 * 3600 + 14 * 60 + Math.round(p * 1500); $('clk').textContent = [sec / 3600 | 0, (sec / 60 | 0) % 60, sec % 60].map(v => String(v).padStart(2, '0')).join(':'); $('cnt').textContent = n;
+    pan.forEach((e, i) => { e.style.opacity = (1 - .82 * cover(p - .05 + i / 27 * .1)).toFixed(2); });
+    let m = '', f = ''; const known = p >= a.cls;
+    for (let q = 0; q <= 1.0001; q += .01) { const pt = gx(q).toFixed(1) + ' ' + gy(q <= p ? power(q) : (known ? PMAX * (1 - .7 * cover(q)) : PMAX)).toFixed(1); if (q <= p) m += (m ? 'L' : 'M') + pt; if (q >= p - .005) f += (f ? 'L' : 'M') + pt; }
+    m += 'L' + gx(p).toFixed(1) + ' ' + gy(power(p)).toFixed(1);
+    $('me').setAttribute('d', m); $('fc').setAttribute('d', f);
+    $('nowl').setAttribute('x1', gx(p)); $('nowl').setAttribute('x2', gx(p)); $('dot').setAttribute('cx', gx(p)); $('dot').setAttribute('cy', gy(power(p)));
+  }
+  const forced = parseFloat(new URLSearchParams(location.search).get('p'));
+  function read() { const r = story.getBoundingClientRect(), h = r.height - innerHeight; target = Math.min(1, Math.max(0, -r.top / h)); }
+  function loop() { if (isNaN(forced)) { read(); p += (target - p) * .1; if (Math.abs(target - p) < .0002) p = target; } else p = forced; if (story.getBoundingClientRect().bottom > 0) draw(); requestAnimationFrame(loop); }
+  addEventListener('resize', fit); fit(); loop();
+})();
+</script>
+<script src="assets/nuno.js"></script>
+</body>
+</html>

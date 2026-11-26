@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Netzbetreiber – Nuno Labs</title>
+<link rel="icon" href="assets/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css"><link rel="stylesheet" href="assets/r6.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><filter id="lb" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3.2"/></filter></defs></svg>
+<div class="wrap">
+<header class="nav">
+  <a class="brand" href="index.html"><svg viewBox="0 0 100 100"><g filter="url(#lb)"><circle cx="33" cy="62" r="22" fill="#F26938"/><circle cx="67" cy="60" r="22" fill="#0097B2"/><circle cx="50" cy="38" r="23" fill="#F38D03"/></g></svg>Nuno Labs</a>
+  <a href="index.html#technik">Technik</a>
+  <div class="dd" tabindex="0"><span class="cur">Lösungen</span><div><a href="direktvermarkter.html">Direktvermarkter</a><a href="anlagenbetreiber.html">Anlagenbetreiber</a><a href="netzbetreiber.html">Netzbetreiber</a><a href="batteriespeicher.html">Batteriespeicher</a></div></div>
+  <a class="" href="karriere.html">Karriere</a>
+  <a class="cta" href="mailto:hello@nuno-labs.de">Demo anfragen</a>
+</header>
+
+<section class="hero">
+  <div>
+    <span class="lab" data-reveal>Für Netzbetreiber</span>
+    <h1 data-reveal style="--d:.06s">Die nächsten zwei Stunden, <em>Park für Park.</em></h1>
+    <p class="lead" data-reveal style="--d:.12s">Nuno Labs zeigt, wie viel Solarstrom gleich ins Netz drängt. Für Redispatch und Engpassmanagement mit weniger Sicherheitsaufschlag.</p>
+    <div class="acts" data-reveal style="--d:.18s"><a class="btn" href="mailto:hello@nuno-labs.de?subject=Demo%20Netzbetreiber">Demo anfragen <svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="tl" href="#bekommen">Was Sie bekommen</a></div>
+  </div>
+  <figure class="fig" data-reveal style="--d:.1s"><div class="rs" data-raster="netz"></div><figcaption><span class="lab">Abb. · Fünf Parks an einem Netzknoten</span><span class="lab">Illustration</span></figcaption></figure>
+</section>
+
+<section class="sec">
+  <div class="sec-h"><span class="lab" data-reveal>01 — Das Problem</span><h2 data-reveal>Sie planen das Netz für eine Einspeisung, die sich mit jeder Wolke ändert.</h2></div>
+  <div class="ind prob" data-reveal><p>Mit jedem neuen Solarpark wächst der Anteil der Last, den niemand genau kennt. Wer vorsorglich abregelt, verschenkt Strom. Wer zu spät abregelt, riskiert den Engpass.</p><p>Eine Prognose, die am Standort misst, verkleinert diese Lücke genau im Zeitfenster, in dem Sie eingreifen.</p></div>
+</section>
+
+<section class="sec" id="bekommen">
+  <div class="sec-h"><span class="lab" data-reveal>02 — Was Sie bekommen</span><h2 data-reveal>Drei Dinge, die Ihre heutige Prognose nicht kann.</h2></div>
+  <div class="ind three"><div data-reveal style="--d:0.00s"><b>1</b><h3>Einspeisung mit Vorlauf</h3><p>Die erwartete Leistung je Park für die nächsten zwei Stunden.</p></div><div data-reveal style="--d:0.08s"><b>2</b><h3>Standortgenau</h3><p>Gemessen am Park und nicht aus dem Rasterpunkt eines Wettermodells abgeleitet.</p></div><div data-reveal style="--d:0.16s"><b>3</b><h3>Für Ihre Leittechnik</h3><p>Die Werte kommen per API in die Systeme, mit denen Sie heute schon arbeiten.</p></div></div>
+</section>
+
+<section class="sec">
+  <div class="sec-h"><span class="lab" data-reveal>03 — Die Prognose</span><h2 data-reveal>Die Einspeisung von gleich, sichtbar im Leitsystem von jetzt.</h2></div>
+  <div class="ind"><div class="product" data-chart-wrap data-reveal>
+    <div class="p-top"><strong>Solarpark Nord</strong><span>42 MWp</span><span class="num" data-out="time">11:00</span></div>
+    <div class="p-body">
+      <div class="p-chart"><div data-chart></div><div class="legend"><span><i></i>Gemessen</span><span class="f"><i></i>Nuno-Prognose</span><span class="n"><i></i>Wettermodell</span></div></div>
+      <div class="p-side">
+        <div class="kpi"><small>Leistung jetzt</small><b class="num"><span data-out="now">38,2</span><em>MW</em></b></div>
+        <div class="kpi"><small>In 15 Minuten</small><b class="num"><span data-out="p15">36,0</span><em>MW</em></b></div>
+        <div class="kpi"><small>In 30 Minuten</small><b class="num"><span data-out="p30">31,4</span><em>MW</em></b></div>
+        <div class="kpi"><small>Rampe (15 min)</small><b class="num" data-out="ramp">−6 %</b></div>
+      </div>
+    </div>
+  </div><p class="note">Beispieldaten zur Illustration.</p></div>
+</section>
+
+<section class="sec">
+  <div class="sec-h"><span class="lab" data-reveal>04 — So starten Sie</span><h2 data-reveal>Vom ersten Gespräch zur ersten Prognose.</h2></div>
+  <div class="ind rows"><div class="row" data-reveal><span class="lab">Schritt 1</span><h3>Standort wählen</h3><p>Wir sehen uns gemeinsam an, an welchem Park eine Kurzfristprognose am meisten bringt.</p><span></span></div><div class="row" data-reveal><span class="lab">Schritt 2</span><h3>Sensor-Hub aufstellen</h3><p>Der Hub kommt an den Park. Die Anlage selbst bleibt unverändert.</p><span></span></div><div class="row" data-reveal><span class="lab">Schritt 3</span><h3>Gegen heute messen</h3><p>Sie vergleichen unsere Prognose mit der, die Sie heute nutzen. Die Zahlen entscheiden.</p><span></span></div></div>
+</section>
+
+<section class="sec">
+  <div class="sec-h"><span class="lab" data-reveal>05 — Weitere Lösungen</span><h2 data-reveal>Dieselbe Prognose, andere Aufgabe.</h2></div>
+  <div class="ind rows"><a class="row" href="direktvermarkter.html" data-reveal><span class="lab">Handel</span><h3>Direktvermarkter</h3><p>Handeln Sie die Rampe, statt sie als Ausgleichsenergie zu bezahlen.</p><svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="row" href="anlagenbetreiber.html" data-reveal><span class="lab">Erzeugung</span><h3>Anlagenbetreiber</h3><p>Derselbe Park, besser prognostiziert, besser vermarktet.</p><svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="row" href="batteriespeicher.html" data-reveal><span class="lab">Speicher</span><h3>Batteriespeicher</h3><p>Co-Location fahren, als wüssten Sie, was die Sonne vorhat.</p><svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+</section>
+<section class="end"><h2 data-reveal>Sehen Sie die Prognose an einem Ihrer eigenen Parks.</h2><a class="btn" href="mailto:hello@nuno-labs.de" data-reveal>Demo anfragen <svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></section>
+<footer class="foot"><span>Nuno Labs · TUM Spin-off, München · gefördert durch EXIST</span><a href="karriere.html">Karriere</a><a href="mailto:hello@nuno-labs.de">hello@nuno-labs.de</a><a href="https://www.linkedin.com/company/108688273/">LinkedIn</a><a href="https://nuno-labs.de/impressum">Impressum</a></footer>
+</div>
+<script src="assets/halftone-clouds.js"></script><script src="assets/raster.js"></script><script src="assets/nuno.js"></script>
+</body>
+</html>
