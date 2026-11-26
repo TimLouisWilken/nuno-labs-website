@@ -24,7 +24,8 @@
   if (wordEls.length) { addEventListener('scroll', words, { passive: true }); addEventListener('resize', words); words(); }
 
   /* ---------- Prognose-Chart (Beispieldaten) ---------- */
-  const N = 240, W = 760, H = 340, L = 40, R = 14, T = 16, B = 30, YM = 50;
+  const NARROW = innerWidth < 700;
+  const N = 240, W = NARROW ? 430 : 760, H = NARROW ? 300 : 340, L = NARROW ? 28 : 40, R = NARROW ? 12 : 14, T = 16, B = 30, YM = 50;
   const X = i => L + (W - L - R) * i / N, Y = v => T + (H - T - B) * (1 - v / YM);
   const clear = i => 30 + 14 * Math.sin(Math.PI * (0.18 + 0.64 * i / N));
   const dips = [[62, .5, 8], [118, .3, 5], [150, .62, 11], [204, .28, 6]];
@@ -42,7 +43,7 @@
   function chart(el) {
     let g = '';
     for (let v = 0; v <= YM; v += 10) g += `<line class="c-grid" x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}"/><text class="c-lab" x="${L - 8}" y="${Y(v) + 4}" text-anchor="end">${v}</text>`;
-    for (let i = 0; i <= N; i += 30) { const m = 600 + i; g += `<text class="c-lab" x="${X(i)}" y="${H - 8}" text-anchor="middle">${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}</text>`; }
+    for (let i = 0; i <= N; i += NARROW ? 60 : 30) { const m = 600 + i; g += `<text class="c-lab" x="${X(i)}" y="${H - 8}" text-anchor="middle">${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}</text>`; }
     el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Beispiel: gemessene Leistung, Standardprognose und Nuno-Kurzfristprognose">${g}
       <path class="c-nwp" d="${path(Array.from({ length: N + 1 }, (_, i) => [X(i), Y(nwp(i))]))}"/>
       <path class="c-band"/><path class="c-actual"/><path class="c-fc"/>
