@@ -17,7 +17,7 @@
 .world>svg{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:visible;pointer-events:none}
 .ret{stroke:var(--ink);stroke-width:1;opacity:.13}
 .ring{fill:none;stroke:var(--accent);stroke-width:1.6}.tick{stroke:var(--accent);stroke-width:1.4}
-.disc{fill:var(--accent)}
+.disc{fill:var(--accent)}.orbit{fill:none;stroke:var(--ink);stroke-width:1.5;stroke-dasharray:2 9;opacity:.22}
 .sunlab{fill:var(--ink);font-size:17px;font-weight:500}
 .trk{stroke:var(--accent);stroke-width:2;stroke-dasharray:5 9;fill:none;transition:opacity .4s}
 .det{position:absolute;left:0;top:0;opacity:0;transition:opacity .5s;will-change:transform}
@@ -89,8 +89,8 @@
       <canvas id="cv"></canvas>
       <svg id="ov">
         <line class="ret" x1="-400" x2="2320" y1="430" y2="430"/><line class="ret" x1="1220" x2="1220" y1="-200" y2="1280"/>
-        <g id="sun"><circle class="disc" id="disc" cx="1220" cy="430" r="30"/><circle class="ring" cx="1220" cy="430" r="62"/><g id="ticks"></g></g>
-        <text class="sunlab" x="1300" y="396">Sonne</text>
+        <circle class="orbit" cx="1000" cy="2300" r="1882.9"/><g id="sun"><circle class="disc" id="disc" cx="1220" cy="430" r="30"/><circle class="ring" cx="1220" cy="430" r="62"/><g id="ticks"></g></g>
+        <text class="sunlab" id="sunlab" x="1300" y="396">Sonne</text>
         <path class="trk" id="trk" style="opacity:0"/><path class="trk" id="trk2" style="opacity:0"/>
       </svg>
     </div>
@@ -102,11 +102,8 @@
     <span class="hint" id="hint">Scrollen lässt die Zeit laufen</span>
     <div class="copy" id="copy">
       <div><small>Nuno Labs · Solar-Nowcasting</small><h1>Wir sagen bis zu zwei Stunden voraus, was Ihr Solarpark liefert.</h1></div>
-      <div><small>01 · Erkennen</small><h2>Die Kamera am Park erfasst jede Wolke am Himmel.</h2><p><span>Form, Größe, Richtung und Tempo, Bild für Bild.</span></p></div>
-      <div><small>02 · Verfolgen</small><h2>Das Modell berechnet, welche Wolke die Sonne trifft.</h2><p><span>Die meisten ziehen vorbei. Diese eine nicht.</span></p></div>
-      <div><small>03 · Vorhersagen · Schatten in <span id="cd">02:00</span></small><h2>Der Einbruch steht in der Prognose, der Park liefert noch voll.</h2></div>
-      <div><small>04 · Eintreffen</small><h2>Die Wolke steht vor der Sonne. Die Leistung fällt wie vorhergesagt.</h2></div>
-      <div><small>Und weiter</small><h2>Die Sonne ist wieder frei. Die nächste Wolke ist schon erfasst.</h2></div>
+      <div><small>01 · Erkennen</small><h2>Die Kamera am Park erkennt, welche Wolke die Sonne trifft.</h2><p><span>Form, Größe, Richtung und Tempo, Bild für Bild.</span></p></div>
+      <div><small>02 · Vorhersagen</small><h2>Der Einbruch steht in der Prognose, lange bevor die Wolke da ist.</h2></div>
     </div>
     <aside class="hud">
       <header><span>Solarpark · Leistung jetzt</span><b><span id="mw">38,6</span><em>MW</em></b></header>
@@ -137,7 +134,7 @@
 <script src="assets/halftone-clouds.js"></script>
 <script>
 (function () {
-  const SUN = [1220, 430], PMAX = 38.6, SP = 13, RMAX = 6.1, INK = '#141312', OR = '#F26938';
+  const SUN = [1220, 430], SUN0 = [1220, 430], ORB = [1000, 2300, 1882.9], TH0 = Math.atan2(430 - 2300, 1220 - 1000), PMAX = 38.6, SP = 13, RMAX = 6.1, INK = '#141312', OR = '#F26938';
   const ss = (a, b, v) => { const t = Math.min(1, Math.max(0, (v - a) / (b - a))); return t * t * (3 - 2 * t); };
   const mmss = s => String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(Math.floor(s % 60)).padStart(2, '0');
   const MAPS = {}; for (const k in NUNO_CLOUDS) { const m = NUNO_CLOUDS[k], b = atob(m.d), d = new Float32Array(b.length); for (let i = 0; i < b.length; i++) d[i] = b.charCodeAt(i) / 255; MAPS[k] = { w: m.w, h: m.h, r: m.r, d }; }
@@ -164,7 +161,7 @@
   const power = p => fore(p * MIN, 1) + .25 * Math.sin(p * 90) + .15 * Math.sin(p * 37);
   const gx = tau => 4 + 312 * (tau + BACK) / (BACK + AHEAD), gy = v => 78 - (v / 42) * 70;
   { let h = ''; [[0, 'jetzt', 'middle'], [30, '+30 min', 'middle'], [60, '+1 h', 'middle'], [90, '+1,5 h', 'middle'], [120, '+2 h', 'end']].forEach(([m, l, an]) => { const x = gx(m).toFixed(1); if (m) h += `<line class="tk" x1="${x}" x2="${x}" y1="8" y2="82"/>`; h += `<text x="${x}" y="95" text-anchor="${an}">${l}</text>`; }); $('ax').innerHTML = h; }
-  const copy = [...document.querySelectorAll('#copy>div')], bounds = [.10, .26, .44, .56, .80, 2];
+  const copy = [...document.querySelectorAll('#copy>div')], bounds = [.12, .44, 2];
   let K = 1, target = 0, p = 0, t = 0;
   function fit() { const s = Math.max(innerWidth / 1920, innerHeight / 1080); world.style.transform = 'scale(' + s + ')'; K = Math.min(1.6, Math.max(.7, s * (devicePixelRatio || 1))); cv.width = 1920 * K; cv.height = 1080 * K; }
   function dens(c, wx, wy) {
@@ -173,7 +170,7 @@
     return (d[y0 * m.w + x0] * (1 - ax) + d[y0 * m.w + x1] * ax) * (1 - ay) + (d[y1 * m.w + x0] * (1 - ax) + d[y1 * m.w + x1] * ax) * ay;
   }
   const ROW = SP * .866;
-  function draw() {
+  function draw() { const th = TH0 + (p - .55) * .16; SUN[0] = ORB[0] + ORB[2] * Math.cos(th); SUN[1] = ORB[1] + ORB[2] * Math.sin(th); const sunT = `translate(${(SUN[0] - SUN0[0]).toFixed(1)} ${(SUN[1] - SUN0[1]).toFixed(1)})`;
     t += .016; const cvr = cover(p);
     C.forEach((c, i) => { c.x = c.x0 + p * c.vx + 8 * Math.sin(t * .35 + i * 2); c.y = c.y0 + p * c.vy + 5 * Math.sin(t * .28 + i); });
     ctx.setTransform(K, 0, 0, K, 0, 0); ctx.clearRect(0, 0, 1920, 1080);
@@ -201,6 +198,7 @@
     ctx.fill();
     ctx.fillStyle = OR; ctx.beginPath(); for (let i = 0; i < lit.length; i += 3) { ctx.moveTo(lit[i] + lit[i + 2], lit[i + 1]); ctx.arc(lit[i], lit[i + 1], lit[i + 2], 0, 6.283); } ctx.fill();
     /* Erkennung */
+    $('sun').setAttribute('transform', sunT); $('sunlab').setAttribute('transform', sunT);
     let n = 0;
     C.forEach(c => { if (!c.d) return; const cx = c.x + c.w / 2, vis = cx > -80 && cx < 2000, on = p >= c.det && vis; if (p >= c.det) n++;
       c.d.style.transform = `translate3d(${(c.x - 12).toFixed(1)}px,${(c.y - 12).toFixed(1)}px,0)`; c.d.classList.toggle('on', on); c.d.classList.toggle('cls', p >= c.cls);
@@ -210,7 +208,7 @@
     $('disc').style.opacity = 1 - cvr; 
     const k = bounds.findIndex(v => p < v); copy.forEach((d, i) => d.classList.toggle('on', i === k));
     $('hint').style.opacity = p < .03 ? 1 : 0; $('bar').style.transform = 'scaleX(' + p.toFixed(4) + ')';
-    $('mw').textContent = power(p).toFixed(1).replace('.', ','); $('cd').textContent = mmss(Math.max(0, (a.t0 - p) * 1500));
+    $('mw').textContent = power(p).toFixed(1).replace('.', ',');
     const sec = 12 * 3600 + 14 * 60 + Math.round(p * 1500); $('clk').textContent = [sec / 3600 | 0, (sec / 60 | 0) % 60, sec % 60].map(v => String(v).padStart(2, '0')).join(':'); $('cnt').textContent = n;
     pan.forEach((e, i) => { e.style.opacity = (1 - .82 * cover(p - .05 + i / 27 * .1)).toFixed(2); });
     /* Diagramm: links gemessen, rechts die Prognose bis zwei Stunden voraus. Die Kurve wandert mit der Zeit nach links. */
