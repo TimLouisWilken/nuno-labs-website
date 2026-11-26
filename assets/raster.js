@@ -110,4 +110,45 @@
     let last = performance.now(); (function loop(now) { if (vis) { t += Math.min(.1, (now - last) / 1000); draw(); } last = now; requestAnimationFrame(loop); })(last);
   }
   document.querySelectorAll('[data-raster]').forEach(mount);
+
+  /* ---- Fotos als Punktraster in echten Farben: bauen sich beim Scrollen auf, reagieren auf die Maus ---- */
+  const PH = {};
+  function pmap(k) { if (PH[k]) return PH[k]; const m = (window.NUNO_PHOTOS || {})[k]; if (!m) return null; const b = atob(m.d), d = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) d[i] = b.charCodeAt(i); return PH[k] = { w: m.w, h: m.h, d }; }
+  function photo(el) {
+    const m = pmap(el.dataset.photo); if (!m) return;
+    const cv = document.createElement('canvas'), ctx = cv.getContext('2d'); el.appendChild(cv);
+    const sp = +el.dataset.sp || 8, row = sp * .866, fx = +(el.dataset.fx ?? .5), fy = +(el.dataset.fy ?? .5);
+    let W = 0, H = 0, dpr = 1, cells = [], vis = false, t = 0, mx = -999, my = -999, shown = -1;
+    function build() {
+      const r = el.getBoundingClientRect(); W = r.width; H = r.height; dpr = Math.min(2, devicePixelRatio || 1); cv.width = W * dpr; cv.height = H * dpr; cells = [];
+      const sc = Math.max(W / m.w, H / m.h), ox = (W - m.w * sc) * fx, oy = (H - m.h * sc) * fy;
+      for (let j = 0, y = row / 2; y < H; j++, y = row / 2 + j * row) for (let x = sp / 2 + (j & 1) * sp / 2; x < W; x += sp) {
+        const u = Math.min(m.w - 1.001, Math.max(0, (x - ox) / sc)), v = Math.min(m.h - 1.001, Math.max(0, (y - oy) / sc)), x0 = u | 0, y0 = v | 0, ax = u - x0, ay = v - y0, c = [0, 0, 0];
+        for (let k = 0; k < 3; k++) { const p = (yy, xx) => m.d[(yy * m.w + xx) * 3 + k]; c[k] = (p(y0, x0) * (1 - ax) + p(y0, x0 + 1) * ax) * (1 - ay) + (p(y0 + 1, x0) * (1 - ax) + p(y0 + 1, x0 + 1) * ax) * ay; }
+        const lum = (.3 * c[0] + .59 * c[1] + .11 * c[2]) / 255, g = lum * 255, S = 1.22;
+        const col = c.map(q => Math.round(Math.min(255, Math.max(0, g + (q - g) * S))));
+        cells.push(x, y, sp * .6 * (.42 + .58 * Math.pow(1 - lum, .8)), `rgb(${col[0]},${col[1]},${col[2]})`);
+      }
+    }
+    function prog() { const r = el.getBoundingClientRect(); return Math.min(1, Math.max(0, (innerHeight - r.top) / (innerHeight * .7))); }
+    function draw() {
+      const p = RM ? 1 : prog(), near = mx > -900, still = p >= 1 && !near;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+      for (let i = 0; i < cells.length; i += 4) {
+        const x = cells[i], y = cells[i + 1]; let r = cells[i + 2] * ss(0, .22, p * 1.3 - (x / W * .75 + y / H * .25) * .9 + .02);
+        if (r < .25) continue;
+        if (!RM) r *= 1 + .07 * Math.sin(t * 1.3 + x * .018 + y * .026);
+        if (near) { const d = Math.hypot(x - mx, y - my); if (d < 110) r *= 1 + .7 * (1 - d / 110) ** 2; }
+        ctx.fillStyle = cells[i + 3]; ctx.beginPath(); ctx.arc(x, y, r, 0, 6.283); ctx.fill();
+      }
+      shown = p;
+    }
+    build(); draw(); addEventListener('resize', () => { build(); draw(); });
+    if (RM) return;
+    el.addEventListener('pointermove', e => { const r = el.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; });
+    el.addEventListener('pointerleave', () => { mx = my = -999; });
+    new IntersectionObserver(e => vis = e[0].isIntersecting, { rootMargin: '80px' }).observe(el);
+    let last = performance.now(); (function loop(now) { if (vis) { t += Math.min(.1, (now - last) / 1000); draw(); } last = now; requestAnimationFrame(loop); })(last);
+  }
+  document.querySelectorAll('[data-photo]').forEach(photo);
 })();

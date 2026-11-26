@@ -67,6 +67,11 @@
 .lrow small{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}.lrow h3{font-size:clamp(22px,2.4vw,34px);font-weight:500;letter-spacing:-.035em;margin:0}.lrow p{font-size:15px;color:var(--muted);max-width:30em}
 .lrow svg{width:15px;height:15px;opacity:.35;transition:.3s}.lrow:hover{padding-left:12px}.lrow:hover svg{opacity:1;color:var(--accent);transform:translateX(4px)}
 @media(max-width:860px){.lrow{grid-template-columns:1fr 18px}.lrow small{display:none}.lrow p{grid-column:1}}
+.ph{position:relative;overflow:hidden;border-radius:8px;background:#e6e2da}.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}.ph:hover img{transform:scale(1.04)}
+.three{gap:0 32px}.three div,.three div+div{padding:20px 0 10px;border-left:0}.three .ph{aspect-ratio:4/3;margin-bottom:20px;padding:0}.three h3{margin-top:18px!important}
+.band{margin:clamp(70px,10vh,120px) 0 0}.band .ph{aspect-ratio:21/8}.band figcaption{display:flex;justify-content:space-between;gap:20px;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:12px}
+.sol .team{border:0;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.team .ph{aspect-ratio:4/5}.team h3{font-size:19px;font-weight:500;letter-spacing:-.03em;margin:14px 0 2px}.team p{font-size:14px;color:var(--muted)}
+@media(max-width:860px){.sol .team{grid-template-columns:1fr}.band .ph{aspect-ratio:4/3}}
 .end{margin-top:clamp(80px,12vh,130px);border-top:1px solid var(--line);padding:clamp(50px,8vh,90px) 0 40px;display:flex;gap:30px;align-items:end;flex-wrap:wrap}
 .end h2{font-size:clamp(28px,3.6vw,54px);font-weight:500;letter-spacing:-.035em;line-height:1.05;margin:0 auto 0 0;max-width:13em}
 .btn{display:inline-flex;align-items:center;height:48px;padding:0 22px;border-radius:8px;background:var(--ink);color:var(--bg);font-size:15px;font-weight:500}
@@ -90,7 +95,7 @@
     </div>
     <header class="nav">
       <a class="brand" href="#"><svg viewBox="0 0 100 100"><g filter="url(#lb)"><circle cx="33" cy="62" r="22" fill="#F26938"/><circle cx="67" cy="60" r="22" fill="#0097B2"/><circle cx="50" cy="38" r="23" fill="#F38D03"/></g></svg>Nuno Labs</a>
-      <a href="#technik">Technik</a><a href="#loesungen">Lösungen</a><a href="karriere.html">Karriere</a><a class="cta" href="mailto:hello@nuno-labs.de">Demo anfragen</a>
+      <a href="#technik">Technik</a><a href="#loesungen">Lösungen</a><a href="team.html">Team</a><a href="karriere.html">Karriere</a><a class="cta" href="mailto:hello@nuno-labs.de">Demo anfragen</a>
     </header>
     <div class="meta"><span>Himmelskamera · <b>Sichtfeld</b></span><span>Zeit <b id="clk">12:14:00</b></span><span>Erfasst <b id="cnt">0</b></span></div>
     <span class="hint" id="hint">Scrollen lässt die Zeit laufen</span>
@@ -118,13 +123,14 @@
     <p data-reveal>Wettermodelle kennen den Tag. Wir kennen die Wolke, die in sieben Minuten über Ihrem Park steht.</p>
   </section>
   <div class="three">
-    <div data-reveal><small>Sensor-Hub</small><h3>Eine Kamera, die den ganzen Himmel sieht.</h3><p>Der Sensor-Hub steht am Park und beobachtet den Himmel von Horizont zu Horizont.</p></div>
-    <div data-reveal style="--d:.08s"><small>Modell</small><h3>Aus Wolken werden Megawatt.</h3><p>Das Modell erkennt jede Wolke, verfolgt ihre Zugbahn und berechnet, wann ihr Schatten die Module trifft.</p></div>
-    <div data-reveal style="--d:.16s"><small>Prognose</small><h3>Die Zahl kommt dort an, wo Sie entscheiden.</h3><p>Leistung je Viertelstunde, bis zwei Stunden voraus, per API in Ihr Handels- oder Leitsystem.</p></div>
+    <div data-reveal><div class="ph"><img src="assets/img/wolke-sonne.jpg" alt="Wolke am blauen Himmel" loading="lazy" style="object-position:35% 50%"></div><small>Sensor-Hub</small><h3>Eine Kamera, die den ganzen Himmel sieht.</h3><p>Der Sensor-Hub steht am Park und beobachtet den Himmel von Horizont zu Horizont.</p></div>
+    <div data-reveal style="--d:.08s"><div class="ph"><img src="assets/img/sonne-hinter-wolke.jpg" alt="Sonne hinter einer Wolke" loading="lazy" style="object-position:50% 50%"></div><small>Modell</small><h3>Aus Wolken werden Megawatt.</h3><p>Das Modell erkennt jede Wolke, verfolgt ihre Zugbahn und berechnet, wann ihr Schatten die Module trifft.</p></div>
+    <div data-reveal style="--d:.16s"><div class="ph"><img src="assets/img/park-weit.jpg" alt="Solarpark aus der Luft" loading="lazy" style="object-position:50% 80%"></div><small>Prognose</small><h3>Die Zahl kommt dort an, wo Sie entscheiden.</h3><p>Leistung je Viertelstunde, bis zwei Stunden voraus, per API in Ihr Handels- oder Leitsystem.</p></div>
   </div>
+  <figure class="band"><div class="ph"><img src="assets/img/park-felder.jpg" alt="Solarpark zwischen Feldern aus der Luft" loading="lazy" style="object-position:50% 62%"></div><figcaption><span>Ein Solarpark zwischen Feldern</span><span>Foto: Platzhalter</span></figcaption></figure>
   <section class="sol" id="loesungen"><h2 data-reveal>Vier Branchen, eine Frage: Was liefert die Sonne gleich?</h2><div><a class="lrow" href="direktvermarkter.html" data-reveal><small>Handel</small><h3>Direktvermarkter</h3><p>Handeln Sie die Rampe, statt sie als Ausgleichsenergie zu bezahlen.</p><svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="lrow" href="anlagenbetreiber.html" data-reveal><small>Erzeugung</small><h3>Anlagenbetreiber</h3><p>Derselbe Park, besser prognostiziert, besser vermarktet.</p><svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="lrow" href="netzbetreiber.html" data-reveal><small>Netz</small><h3>Netzbetreiber</h3><p>Die Einspeisung der nächsten zwei Stunden, Park für Park.</p><svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="lrow" href="batteriespeicher.html" data-reveal><small>Speicher</small><h3>Batteriespeicher</h3><p>Co-Location fahren, als wüssten Sie, was die Sonne vorhat.</p><svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></section>
   <section class="end"><h2>Sehen Sie die Prognose an einem Ihrer eigenen Parks.</h2><a class="btn" href="mailto:hello@nuno-labs.de">Demo anfragen</a></section>
-  <p class="cred">Nuno Labs · TUM Spin-off, München · gefördert durch EXIST. Die Szene ist eine Illustration; Zeiten und Leistung sind Beispielwerte.</p>
+  <p class="cred">Nuno Labs · TUM Spin-off, München · gefördert durch EXIST. Die Szene ist eine Illustration; Zeiten und Leistung sind Beispielwerte. Fotos: Platzhalter von Wikimedia Commons, <a href="assets/img/QUELLEN.txt" style="text-decoration:underline">Urheber und Lizenzen</a>.</p>
 </div>
 
 <script src="assets/halftone-clouds.js"></script>
@@ -209,6 +215,6 @@
   addEventListener('resize', fit); fit(); loop();
 })();
 </script>
-<script src="assets/nuno.js"></script>
+<script src="assets/raster.js"></script><script src="assets/nuno.js"></script>
 </body>
 </html>
