@@ -88,7 +88,7 @@
     <div class="world" id="world">
       <canvas id="cv"></canvas>
       <svg id="ov">
-        <line class="ret" x1="-400" x2="2320" y1="430" y2="430"/><line class="ret" x1="1220" x2="1220" y1="-200" y2="1280"/>
+        <g id="ret"><line class="ret" x1="-600" x2="2520" y1="430" y2="430"/><line class="ret" x1="1220" x2="1220" y1="-400" y2="1480"/></g>
         <circle class="orbit" cx="1000" cy="2300" r="1882.9"/><g id="sun"><circle class="disc" id="disc" cx="1220" cy="430" r="30"/><circle class="ring" cx="1220" cy="430" r="62"/><g id="ticks"></g></g>
         <text class="sunlab" id="sunlab" x="1300" y="396">Sonne</text>
         <path class="trk" id="trk" style="opacity:0"/><path class="trk" id="trk2" style="opacity:0"/>
@@ -146,7 +146,7 @@
     { id: '', m: 'c', w: 150, flip: 0, x0: -260, vx: 2400, y0: 640, vy: -30, det: 9, cls: 9, hit: 0 }
   ];
   const $ = id => document.getElementById(id), world = $('world'), cv = $('cv'), ctx = cv.getContext('2d'), story = $('story');
-  C.forEach(c => { c.h = c.w * MAPS[c.m].r; if (!c.id) return; const d = document.createElement('div'); d.className = 'det' + (c.hit ? ' hit' : ''); d.style.width = (c.w + 24) + 'px'; d.style.height = (c.h + 24) + 'px'; d.innerHTML = `<i></i><i></i><i></i><i></i><b>Wolke ${c.id} · 9,4 m/s</b><span></span>`; world.appendChild(d); c.d = d; c.s = d.querySelector('span'); });
+  C.forEach(c => { c.h = c.w * MAPS[c.m].r; if (!c.id) return; c.det = Math.max(0, (-c.w - c.x0) / c.vx); c.cls = c.det; /* schon beim Eintritt ins Bild erfasst */ const d = document.createElement('div'); d.className = 'det' + (c.hit ? ' hit' : ''); d.style.width = (c.w + 24) + 'px'; d.style.height = (c.h + 24) + 'px'; d.innerHTML = `<i></i><i></i><i></i><i></i><b>Wolke ${c.id} · 9,4 m/s</b><span></span>`; world.appendChild(d); c.d = d; c.s = d.querySelector('span'); });
   let tk = ''; for (let a = 0; a < 360; a += 15) { const r = a * Math.PI / 180, r0 = 74, r1 = a % 45 ? 82 : 92; tk += `<line class="tick" x1="${SUN[0] + r0 * Math.cos(r)}" y1="${SUN[1] + r0 * Math.sin(r)}" x2="${SUN[0] + r1 * Math.cos(r)}" y2="${SUN[1] + r1 * Math.sin(r)}"/>`; } $('ticks').innerHTML = tk;
   const pk = $('pk'), pan = []; for (let i = 0; i < 28; i++) { const e = document.createElement('i'); pk.appendChild(e); pan.push(e); }
   const cover = p => { const c = C[1]; return ss(c.t0, c.t0 + .07, p) * (1 - ss(c.t1 - .07, c.t1, p)); };
@@ -198,9 +198,9 @@
     ctx.fill();
     ctx.fillStyle = OR; ctx.beginPath(); for (let i = 0; i < lit.length; i += 3) { ctx.moveTo(lit[i] + lit[i + 2], lit[i + 1]); ctx.arc(lit[i], lit[i + 1], lit[i + 2], 0, 6.283); } ctx.fill();
     /* Erkennung */
-    $('sun').setAttribute('transform', sunT); $('sunlab').setAttribute('transform', sunT);
+    $('sun').setAttribute('transform', sunT); $('ret').setAttribute('transform', sunT); $('sunlab').setAttribute('transform', sunT);
     let n = 0;
-    C.forEach(c => { if (!c.d) return; const cx = c.x + c.w / 2, vis = cx > -80 && cx < 2000, on = p >= c.det && vis; if (p >= c.det) n++;
+    C.forEach(c => { if (!c.d) return; const vis = c.x + c.w > -12 && c.x < 1940, on = p >= c.det && vis; if (p >= c.det) n++;
       c.d.style.transform = `translate3d(${(c.x - 12).toFixed(1)}px,${(c.y - 12).toFixed(1)}px,0)`; c.d.classList.toggle('on', on); c.d.classList.toggle('cls', p >= c.cls);
       let txt = 'zieht vorbei'; if (c.hit) txt = p < c.t0 ? 'trifft die Sonne in ' + mmss((c.t0 - p) * 1500) : p < c.t1 ? 'verdeckt die Sonne' : 'durchgezogen'; if (c.s.textContent !== txt) c.s.textContent = txt; });
     const a = C[1], b = C[3], line = (c, el) => { const on = p >= c.cls && p < c.t0 + .02; el.style.opacity = on ? 1 : 0; if (on) el.setAttribute('d', `M${(c.x + c.w * .8).toFixed(0)} ${(c.y + c.h * .55).toFixed(0)}L${SUN[0] - 98} ${SUN[1]}`); };
