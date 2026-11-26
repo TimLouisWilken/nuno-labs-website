@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nuno Labs – R1 · Film</title>
+<link rel="icon" href="assets/logo.svg">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css">
+<style>
+:root{--bg:#f4f1ec;--ink:#161513;--muted:#77726a;--line:rgba(22,21,19,.14);--accent:#F26938;--card:#fff}
+.frame{position:relative;margin:10px;height:min(calc(100vh - 20px),1060px);min-height:620px;border-radius:14px;overflow:hidden;background:#0c1830;color:#fff}
+.frame>svg{position:absolute;inset:0;width:100%;height:100%}
+.film{animation:drift 60s ease-in-out infinite alternate;transform-origin:60% 60%}
+@keyframes drift{from{transform:scale(1.02)}to{transform:scale(1.14) translate(-2%,1.5%)}}
+.shade{position:absolute;inset:0;background:rgba(8,12,22,.1);pointer-events:none}
+.frame::after{content:"";position:absolute;inset:auto 0 0 0;height:46%;background:rgba(6,9,16,.34);mask-image:linear-gradient(transparent,#000);pointer-events:none}
+.nav{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;gap:30px;padding:22px 28px;font-size:14px;z-index:3}
+.brand{display:flex;align-items:center;gap:9px;font-weight:600;letter-spacing:.02em;font-size:16px;margin-right:auto;text-transform:uppercase}.brand svg{width:26px;height:26px}
+.nav a:not(.brand){opacity:.85}.nav a:hover{opacity:1}
+.foot{position:absolute;left:28px;right:28px;bottom:30px;display:flex;align-items:flex-end;gap:30px;z-index:3}
+.news{display:inline-flex;gap:8px;align-items:center;font-size:13px;padding:6px 12px;border-radius:999px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.35);margin-bottom:22px}
+h1{font-size:clamp(30px,3.9vw,58px);font-weight:500;letter-spacing:-.03em;line-height:1.06;max-width:13.5em;margin:0}
+.more{margin-left:auto;font-size:14.5px;white-space:nowrap;display:flex;gap:8px;align-items:center}.more svg{width:13px}
+.ov *{vector-effect:non-scaling-stroke}
+.ov .box{fill:none;stroke:#fff;stroke-width:1.2}.ov .trk{fill:none;stroke:var(--accent);stroke-width:1.4;stroke-dasharray:4 7}
+.ov .sun{fill:none;stroke:var(--accent);stroke-width:1.4}.ov text{fill:#fff;font-size:19px;font-weight:500;letter-spacing:.02em}.ov text.o{fill:#ff9d73}
+.ov{animation:on 1.4s .9s both}@keyframes on{from{opacity:0}}
+
+.wrap{max-width:1320px;margin:0 auto;padding:0 clamp(20px,3vw,44px)}
+.say{padding:clamp(80px,13vh,150px) 0;display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.say h2{font-size:clamp(28px,3.4vw,50px);font-weight:500;letter-spacing:-.035em;line-height:1.08;margin:0}
+.say p{font-size:18px;color:var(--muted);max-width:26em;align-self:end;justify-self:end}
+.row{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,5vw,80px);align-items:center;padding:0 0 clamp(60px,9vh,110px)}
+.row:nth-child(even) .pic{order:-1}
+.row small{font-size:13px;color:var(--muted)}
+.row h3{font-size:clamp(24px,2.6vw,38px);font-weight:500;letter-spacing:-.03em;line-height:1.1;margin:14px 0 14px}
+.row p{color:var(--muted);font-size:16.5px;max-width:26em}
+.pic{border-radius:14px;overflow:hidden;aspect-ratio:16/10;background:#ddd;position:relative}
+.pic img{width:100%;height:100%;object-fit:cover}
+.pic.lensbox{background:#e9e5de;display:grid;place-items:center}
+.lens{position:relative;width:62%;aspect-ratio:1;border-radius:50%;box-shadow:0 0 0 1px rgba(22,21,19,.35),0 30px 50px -28px rgba(22,21,19,.6)}
+.lens canvas{position:absolute;inset:0;width:100%;height:100%;border-radius:50%}
+.end{border-top:1px solid var(--line);padding:clamp(60px,9vh,100px) 0 40px;display:flex;gap:30px;align-items:end;flex-wrap:wrap}
+.end h2{font-size:clamp(28px,3.6vw,54px);font-weight:500;letter-spacing:-.035em;line-height:1.05;margin:0 auto 0 0;max-width:13em}
+.btn{display:inline-flex;align-items:center;height:48px;padding:0 22px;border-radius:999px;background:var(--ink);color:var(--bg);font-size:15px;font-weight:500}
+.cred{font-size:12px;color:var(--muted);padding:0 0 36px}
+@media(max-width:860px){.nav a:not(.brand){display:none}.say,.row{grid-template-columns:1fr}.say p{justify-self:start}.row:nth-child(even) .pic{order:0}.more{display:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><filter id="lb" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3.2"/></filter></defs></svg>
+<section class="frame">
+  <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-label="Eine Wolke zieht auf die Sonne zu">
+    <g class="film">
+      <image href="assets/img/wolke-sonne.jpg" width="1920" height="1080" transform="translate(1920 0) scale(-1 1)" style="filter:saturate(.7) contrast(1.06) brightness(.86)"/>
+      <g class="ov">
+        <path class="box" d="M560 250v-40h40M1210 210h40v40M1250 740v40h-40M600 780h-40v-40"/>
+        <text x="560" y="192">Wolke 01 · 9,4 m/s</text>
+        <path class="trk" d="M905 800L1170 1005"/>
+        <circle class="sun" cx="1210" cy="1037" r="46"/>
+        <text class="o" x="1075" y="892">Schatten in 04:10</text>
+      </g>
+    </g>
+  </svg>
+  <div class="shade"></div>
+  <header class="nav">
+    <a class="brand" href="#"><svg viewBox="0 0 100 100"><g filter="url(#lb)"><circle cx="33" cy="62" r="22" fill="#F26938"/><circle cx="67" cy="60" r="22" fill="#0097B2"/><circle cx="50" cy="38" r="23" fill="#F38D03"/></g></svg>Nuno Labs</a>
+    <a href="#technik">Technik</a><a href="a2-direktvermarkter.html">Lösungen</a><a href="karriere-a.html">Karriere</a><a href="index.html">Alle Entwürfe</a><a href="mailto:hello@nuno-labs.de">Kontakt</a>
+  </header>
+  <div class="foot">
+    <div><span class="news">TUM Spin-off, gefördert durch EXIST</span>
+      <h1>Wir sagen voraus, was Ihr Solarpark in 15 Minuten liefert.</h1></div>
+    <a class="more" href="#technik">So funktioniert es <svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+  </div>
+</section>
+
+<div class="wrap">
+  <section class="say" id="technik">
+    <h2 data-reveal>Nuno Labs baut Kurzfristprognosen für Solarparks, mit einer eigenen Kamera am Standort.</h2>
+    <p data-reveal>Wettermodelle kennen den Tag. Wir kennen die Wolke, die in sieben Minuten über Ihrem Park steht.</p>
+  </section>
+  <div>
+    <div class="row" data-reveal><div><small>Sensor-Hub</small><h3>Eine Kamera, die den ganzen Himmel sieht.</h3><p>Der Sensor-Hub steht am Park und beobachtet den Himmel von Horizont zu Horizont, Bild für Bild.</p></div><div class="pic lensbox"><div class="lens" data-lens></div></div></div>
+    <div class="row" data-reveal><div><small>Modell</small><h3>Aus Wolken werden Megawatt.</h3><p>Unser Modell erkennt jede Wolke, verfolgt ihre Zugbahn und berechnet, wann ihr Schatten welche Module trifft.</p></div><div class="pic"><img src="assets/img/sonne-hinter-wolke.jpg" alt="Sonne hinter einer Wolke" loading="lazy"></div></div>
+    <div class="row" data-reveal><div><small>Prognose</small><h3>Die Zahl kommt dort an, wo Sie entscheiden.</h3><p>Leistung je Viertelstunde für die nächsten Minuten bis zwei Stunden, per API in Ihr Handels- oder Leitsystem.</p></div><div class="pic"><img src="assets/img/park-weit.jpg" alt="Solarpark aus der Luft" loading="lazy"></div></div>
+  </div>
+  <section class="end"><h2>Sehen Sie die Prognose an einem Ihrer eigenen Parks.</h2><a class="btn" href="mailto:hello@nuno-labs.de">Demo anfragen</a></section>
+  <p class="cred">Fotos: Platzhalter von Wikimedia Commons (Quellen in assets/img/QUELLEN.txt). Einblendungen im Bild sind illustrativ.</p>
+</div>
+<script src="assets/nuno.js"></script><script src="assets/sky.js"></script>
+</body>
+</html>

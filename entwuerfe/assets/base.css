@@ -1,0 +1,78 @@
+/* Nuno Labs – gemeinsame Basis aller Entwürfe */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html,body{overflow-x:clip}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,sans-serif;font-feature-settings:"ss01","cv11","calt";
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;background:var(--bg);color:var(--ink);line-height:1.5}
+h1,h2,h3,p,figure{margin:0}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+.num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum","ss01","cv11"}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+/* Reveal */
+[data-reveal]{opacity:0;transform:translateY(20px);transition:opacity .9s cubic-bezier(.2,.7,.2,1) var(--d,0s),transform .9s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
+[data-reveal].in{opacity:1;transform:none}
+.w{opacity:.2;transition:opacity .45s}.w.on{opacity:1}
+
+/* Logo-Verlauf: drei weiche Kreise – der einzige Verlauf im System */
+.orbs{position:absolute;pointer-events:none;aspect-ratio:1}
+.orbs i{position:absolute;width:48%;aspect-ratio:1;border-radius:50%;filter:blur(var(--orb-blur,64px));opacity:var(--orb-o,.9);will-change:transform}
+.orbs i:nth-child(1){background:#F26938;left:3%;top:40%;animation:orb1 19s ease-in-out infinite alternate}
+.orbs i:nth-child(2){background:#0097B2;right:3%;top:38%;animation:orb2 23s ease-in-out infinite alternate}
+.orbs i:nth-child(3){background:#F38D03;left:26%;top:4%;animation:orb3 17s ease-in-out infinite alternate}
+@keyframes orb1{to{transform:translate(9%,-7%) scale(1.06)}}
+@keyframes orb2{to{transform:translate(-8%,6%) scale(.95)}}
+@keyframes orb3{to{transform:translate(5%,9%) scale(1.05)}}
+
+/* Chart */
+[data-chart] svg{width:100%;height:auto;overflow:visible}
+.c-grid{stroke:var(--line);stroke-width:1}
+.c-lab,.c-nowlab{fill:var(--muted);font-size:11px;font-variant-numeric:tabular-nums}
+.c-nwp{fill:none;stroke:var(--muted);stroke-width:1.5;stroke-dasharray:2 6;stroke-linecap:round}
+.c-actual{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round;stroke-linecap:round}
+.c-fc{fill:none;stroke:var(--accent);stroke-width:2.2;stroke-linejoin:round;stroke-linecap:round}
+.c-band{fill:var(--accent);opacity:.13}
+.c-now{stroke:var(--ink);opacity:.3}
+.c-dot{fill:var(--accent);stroke:var(--card);stroke-width:2.5}
+
+.c-pv{stroke:var(--accent);stroke-width:1.2;stroke-dasharray:3 4}.c-pvdot{fill:var(--card,#fff);stroke:var(--accent);stroke-width:2}[data-strip]{cursor:ew-resize;touch-action:pan-y}[data-strip] svg{width:100%;height:auto;overflow:visible}
+
+/* Sky-Imager */
+[data-sky] svg,.sc-skysvg svg{width:100%;height:auto;overflow:visible}
+.s-disc{fill:var(--sky)}.s-cloud ellipse{fill:var(--cloud)}
+.s-ring{fill:none;stroke:var(--sky-line);stroke-width:1}.s-rim{fill:none;stroke:var(--sky-rim);stroke-width:1.5}
+.s-glow{fill:#F38D03}.s-sun{fill:var(--accent)}.s-sunring{fill:none;stroke:var(--accent);stroke-width:1}
+.s-det path{fill:none;stroke:var(--vec);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.s-det text{fill:var(--vec);font-size:11px;letter-spacing:.04em}
+.s-path{stroke:var(--accent);stroke-width:1.5;stroke-dasharray:3 6;stroke-linecap:round}
+.s-tick{fill:var(--vec);transition:opacity .3s}
+.s-eta{fill:var(--accent);font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;paint-order:stroke;stroke:var(--sky);stroke-width:5px;stroke-linejoin:round}
+.s-lab{fill:var(--muted);font-size:11px;letter-spacing:.08em}
+
+/* Wolken-Szene */
+.sc{display:grid;gap:22px}
+.sc-main{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr);gap:14px}
+.sc-right{display:grid;gap:14px;grid-template-rows:1fr auto}
+.sc figure{position:relative;margin:0;border:1px solid var(--line);border-radius:var(--sc-r,18px);background:var(--sc-bg,transparent);padding:48px 18px 16px;overflow:hidden;min-width:0}
+.sc figcaption{position:absolute;left:18px;top:15px;font-size:12.5px;color:var(--muted)}
+.sc-sky{display:grid;place-items:center}.sc-skysvg{width:min(430px,100%)}
+.sc-park{display:grid;align-items:center}.sc-park svg,.sc-pow svg{width:100%;height:auto;overflow:visible}
+.pk-panel{fill:var(--ink)}.pk-shadow{fill:var(--pk-shadow,var(--ink));opacity:var(--pk-shadow-o,.1)}
+.sc-chip{position:absolute;right:14px;top:10px;font-size:12.5px;font-weight:500;padding:5px 12px 5px 10px;border-radius:999px;border:1px solid var(--line);display:flex;gap:8px;align-items:center}
+.sc-chip::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--muted);transition:background .3s}.sc-chip.hot::before{background:var(--accent)}
+.sc-val{position:absolute;right:18px;top:9px;font-size:12.5px;color:var(--muted)}.sc-val b{font-size:22px;font-weight:600;letter-spacing:-.04em;color:var(--ink)}
+.sc-dip{fill:var(--accent);font-size:12px;font-weight:600;transition:opacity .3s}
+.sc-leg{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:var(--muted);padding-top:6px}
+.sc-leg span{display:flex;align-items:center;gap:7px}.sc-leg i{width:16px;height:2px;background:var(--ink)}.sc-leg .f i{background:var(--accent)}.sc-leg .n i{background:none;border-top:2px dotted var(--muted)}
+.sc-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.sc-steps li{position:relative;padding-top:16px;opacity:.4;transition:opacity .4s}.sc-steps li.on,.sc-steps li.done{opacity:1}
+.sc-steps i{position:absolute;left:0;right:0;top:0;height:2px;background:var(--line);overflow:hidden}
+.sc-steps i::after{content:"";position:absolute;inset:0;background:var(--ink);transform-origin:left;transform:scaleX(var(--p,0))}
+.sc-steps li.on i::after{background:var(--accent)}
+.sc-steps b{font-size:12.5px;font-weight:500;color:var(--muted)}
+.sc-steps h4{font-size:18px;font-weight:600;letter-spacing:-.03em;margin:6px 0 5px}
+.sc-steps p{font-size:13.5px;line-height:1.45;color:var(--muted);max-width:none}
+@media(max-width:860px){.sc-main{grid-template-columns:1fr}.sc-steps{grid-template-columns:1fr 1fr}}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}[data-reveal]{opacity:1;transform:none}}

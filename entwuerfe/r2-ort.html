@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nuno Labs – R2 · Ort</title>
+<link rel="icon" href="assets/logo.svg">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css">
+<style>
+:root{--bg:#fff;--ink:#131313;--muted:#6f6f6f;--line:rgba(19,19,19,.14);--accent:#F26938;--card:#fff}
+.hero{position:relative;height:min(100vh,1080px);min-height:640px;color:#fff;overflow:hidden;background:#223}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 70%;animation:slow 50s ease-out both}
+@keyframes slow{from{transform:scale(1.12)}to{transform:scale(1)}}
+.hero::after{content:"";position:absolute;inset:0;background:rgba(10,14,18,.22)}
+.nav{position:absolute;left:0;right:0;top:0;z-index:3;display:flex;align-items:center;gap:34px;padding:26px clamp(20px,3.4vw,52px);font-size:14px}
+.brand{display:flex;align-items:center;gap:9px;font-weight:500;font-size:17px;letter-spacing:-.01em;margin-right:auto}.brand svg{width:26px;height:26px}
+.nav .b{background:#fff;color:#131313;padding:11px 16px;font-weight:500}
+.txt{position:absolute;z-index:3;left:clamp(20px,3.4vw,52px);bottom:clamp(36px,7vh,70px);max-width:560px}
+h1{font-size:clamp(30px,3.4vw,50px);font-weight:400;letter-spacing:-.025em;line-height:1.1;margin:0 0 18px}
+.txt p{font-size:15.5px;line-height:1.5;opacity:.92;max-width:27em}
+.txt .b{display:inline-block;margin-top:24px;background:#fff;color:#131313;padding:13px 18px;font-size:14.5px;font-weight:500}
+.tag{position:absolute;z-index:3;right:clamp(20px,3.4vw,52px);bottom:clamp(36px,7vh,70px);font-size:12.5px;text-align:right;opacity:.9;line-height:1.5}
+.wrap{padding:0 clamp(20px,3.4vw,52px)}
+.vision{display:grid;grid-template-columns:minmax(140px,30%) 1fr;gap:30px;padding:clamp(80px,13vh,140px) 0}
+.lab{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}.lab::before{content:"";display:inline-block;width:7px;height:7px;border:1px solid var(--accent);border-radius:50%;margin-right:10px}
+.vision p{font-size:clamp(24px,2.9vw,42px);font-weight:400;letter-spacing:-.03em;line-height:1.16;max-width:22em;margin:0}
+.panel{position:relative;height:min(78vh,720px);overflow:hidden;color:#fff;border-top:1px solid #fff;background:#111}
+.panel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.75) brightness(.78)}
+.panel svg{position:absolute;inset:0;width:100%;height:100%}
+.panel div.t{position:absolute;left:clamp(20px,3.4vw,52px);bottom:44px;z-index:2}
+.panel h2{font-size:clamp(24px,2.6vw,36px);font-weight:500;letter-spacing:-.02em;margin:0;line-height:1.15}.panel h2 span{display:block;font-weight:400;opacity:.72}
+.panel a{display:inline-block;margin-top:18px;font-size:13px;padding:8px 12px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.7)}
+.panel.live{background:#0f0f0f;display:grid;place-items:center}
+.lens{position:relative;height:74%;aspect-ratio:1;border-radius:50%;box-shadow:0 0 0 1px rgba(255,255,255,.25)}.lens canvas{position:absolute;inset:0;width:100%;height:100%;border-radius:50%}
+.ov *{vector-effect:non-scaling-stroke}.ov path,.ov rect{fill:none;stroke:#fff;stroke-width:1.2}.ov text{fill:#fff;font-size:20px;font-weight:500}.ov .o{stroke:var(--accent)}.ov text.o{fill:var(--accent);stroke:none}
+.end{padding:clamp(80px,12vh,130px) 0 50px;display:grid;grid-template-columns:minmax(140px,30%) 1fr;gap:30px}
+.end h2{font-size:clamp(26px,3.2vw,46px);font-weight:400;letter-spacing:-.03em;line-height:1.12;margin:0 0 26px;max-width:16em}
+.end a{display:inline-block;background:var(--ink);color:#fff;padding:14px 20px;font-size:14.5px;font-weight:500}
+.cred{font-size:12px;color:var(--muted);padding:0 0 36px}
+@media(max-width:860px){.nav a:not(.brand):not(.b){display:none}.vision,.end{grid-template-columns:1fr}.tag{display:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><filter id="lb" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3.2"/></filter></defs></svg>
+<section class="hero">
+  <img src="assets/img/park-weit.jpg" alt="Solarpark unter bewölktem Himmel">
+  <header class="nav"><a class="brand" href="#"><svg viewBox="0 0 100 100"><g filter="url(#lb)"><circle cx="33" cy="62" r="22" fill="#F26938"/><circle cx="67" cy="60" r="22" fill="#0097B2"/><circle cx="50" cy="38" r="23" fill="#F38D03"/></g></svg>nuno labs</a><a href="#produkt">Produkt</a><a href="a2-direktvermarkter.html">Lösungen</a><a href="karriere-a.html">Karriere</a><a href="index.html">Alle Entwürfe</a><a class="b" href="mailto:hello@nuno-labs.de">Demo anfragen</a></header>
+  <div class="txt"><h1>Kurzfristprognosen für Solarparks, gemessen am Standort</h1>
+    <p>Nuno Labs stellt eine Kamera an den Park, die den Himmel beobachtet, und sagt daraus die Einspeisung der nächsten Minuten bis zwei Stunden vorher.</p>
+    <a class="b" href="mailto:hello@nuno-labs.de">Demo anfragen</a></div>
+  <div class="tag">Solarpark, Brandenburg<br>Foto: Platzhalter</div>
+</section>
+<div class="wrap">
+  <section class="vision" id="produkt"><span class="lab" data-reveal>Worum es geht</span>
+    <p data-reveal>Eine einzelne Wolke nimmt einem Solarpark in Sekunden die halbe Leistung. Wettermodelle sehen sie nicht kommen. Unsere Kamera steht am Park und sieht sie Minuten vorher.</p></section>
+</div>
+<section class="panel"><svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice"><image href="assets/img/wolke-sonne.jpg" width="1920" height="1080" style="filter:saturate(.7) brightness(.8)"/>
+  <g class="ov"><path d="M670 250v-40h40M1360 210h40v40M1400 740v40h-40M710 780h-40v-40"/><text x="670" y="192">Wolke 01</text><circle class="o" cx="710" cy="1037" r="46" fill="none" stroke-width="1.4"/><path class="o" d="M1010 800L750 1005" stroke-dasharray="4 7"/></g></svg>
+  <div class="t"><h2>Sensor-Hub<span>Die Kamera am Park erkennt jede Wolke</span></h2><a href="#">Mehr erfahren</a></div></section>
+<section class="panel live"><div class="lens" data-lens></div>
+  <div class="t"><h2>Modell<span>Aus der Zugbahn wird eine Leistungsprognose</span></h2><a href="#">Mehr erfahren</a></div></section>
+<section class="panel"><img src="assets/img/park-felder.jpg" alt="Solarpark zwischen Feldern aus der Luft">
+  <div class="t"><h2>Schnittstelle<span>Leistung je Viertelstunde, per API in Ihr System</span></h2><a href="#">Mehr erfahren</a></div></section>
+<div class="wrap">
+  <section class="end"><span class="lab">Kontakt</span><div><h2>Am besten zeigen wir Ihnen die Prognose an einem Ihrer eigenen Parks.</h2><a href="mailto:hello@nuno-labs.de">Demo anfragen</a></div></section>
+  <p class="cred">Nuno Labs · TUM Spin-off, München · gefördert durch EXIST. Fotos: Platzhalter von Wikimedia Commons (Quellen in assets/img/QUELLEN.txt).</p>
+</div>
+<script src="assets/nuno.js"></script><script src="assets/sky.js"></script>
+</body>
+</html>

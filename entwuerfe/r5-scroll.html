@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nuno Labs – R5 · Scroll</title>
+<link rel="icon" href="assets/logo.svg">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css">
+<style>
+:root{--bg:#f4f1ec;--ink:#161513;--muted:#77726a;--line:rgba(22,21,19,.14);--accent:#F26938;--card:#fff}
+.story{position:relative;height:560vh}
+.stage{position:sticky;top:0;height:100vh;min-height:560px;overflow:hidden;background:#1d3f7a;color:#fff}
+.world{position:absolute;left:50%;top:50%;width:1920px;height:1080px;margin:-540px 0 0 -960px;transform-origin:50% 50%;will-change:transform}
+.world>img.sky{position:absolute;left:0;top:-650px;width:1920px;height:2160px;max-width:none;will-change:filter}
+.cloud{position:absolute;left:0;top:0;will-change:transform}
+.cloud img{display:block;max-width:none;width:100%;filter:drop-shadow(0 0 22px rgba(255,255,255,.12))}
+.det{position:absolute;inset:-14px;opacity:0;transition:opacity .5s}
+.det.on{opacity:1}
+.det i{position:absolute;width:34px;height:34px;border:1.5px solid #fff}
+.det i:nth-child(1){left:0;top:0;border-right:0;border-bottom:0}.det i:nth-child(2){right:0;top:0;border-left:0;border-bottom:0}
+.det i:nth-child(3){right:0;bottom:0;border-left:0;border-top:0}.det i:nth-child(4){left:0;bottom:0;border-right:0;border-top:0}
+.det b{position:absolute;left:0;bottom:calc(100% + 10px);font-size:18px;font-weight:500;letter-spacing:.01em;white-space:nowrap;text-shadow:0 1px 10px rgba(10,25,60,.55)}
+.det span{position:absolute;right:0;bottom:calc(100% + 10px);font-size:18px;font-weight:500;white-space:nowrap;opacity:0;transition:opacity .4s;text-shadow:0 1px 10px rgba(10,25,60,.55);font-variant-numeric:tabular-nums}
+.det.cls span{opacity:1}.det.hit span{color:#ffb08f}.det.hit i{border-color:var(--accent)}
+.world svg{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:visible;pointer-events:none}
+.trk{stroke:var(--accent);stroke-width:2;stroke-dasharray:6 10;fill:none;transition:opacity .4s}
+.sunring{fill:none;stroke:var(--accent);stroke-width:2}
+.sunlab{fill:#fff;font-size:18px;font-weight:500}
+
+.nav{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;gap:30px;padding:22px clamp(18px,2.6vw,38px);font-size:14px;z-index:5}
+.brand{display:flex;align-items:center;gap:9px;font-weight:600;letter-spacing:.02em;font-size:16px;margin-right:auto;text-transform:uppercase}.brand svg{width:26px;height:26px}
+.nav a:not(.brand){opacity:.88}.nav a:hover{opacity:1}
+.scrim{position:absolute;left:0;right:0;bottom:0;height:42%;background:rgba(8,18,44,.42);mask-image:linear-gradient(transparent,#000 70%);pointer-events:none;z-index:3}
+.copy{position:absolute;left:clamp(18px,2.6vw,38px);bottom:clamp(26px,5vh,48px);z-index:5;width:min(660px,58vw);height:230px}
+.copy div{position:absolute;left:0;bottom:0;opacity:0;transform:translateY(14px);transition:opacity .55s,transform .55s;pointer-events:none}
+.copy div.on{opacity:1;transform:none}
+.copy small{font-size:13px;letter-spacing:.06em;text-transform:uppercase;opacity:.8;display:block;margin-bottom:14px;font-variant-numeric:tabular-nums}
+.copy h1,.copy h2{font-size:clamp(28px,3.7vw,56px);font-weight:500;letter-spacing:-.03em;line-height:1.06;margin:0}
+.copy p{font-size:16px;opacity:.9;margin-top:14px;max-width:30em}
+.hud{position:absolute;right:clamp(18px,2.6vw,38px);bottom:clamp(26px,5vh,48px);z-index:5;width:min(360px,34vw);background:rgba(10,20,46,.5);backdrop-filter:blur(14px);border-radius:12px;padding:16px 18px 12px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.16)}
+.hud header{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;opacity:.85}
+.hud header b{font-size:26px;font-weight:500;letter-spacing:-.03em;opacity:1;font-variant-numeric:tabular-nums}.hud header b em{font-style:normal;font-size:12.5px;opacity:.75;margin-left:4px;letter-spacing:0}
+.hud svg{width:100%;height:auto;display:block;margin-top:8px;overflow:visible}
+.hud .m{fill:none;stroke:#fff;stroke-width:2.2;stroke-linejoin:round}.hud .f{fill:none;stroke:var(--accent);stroke-width:2.2;stroke-linejoin:round;transition:opacity .5s}
+.hud .n{stroke:rgba(255,255,255,.5);stroke-width:1}.hud .g{stroke:rgba(255,255,255,.16);stroke-width:1}.hud .d{fill:var(--accent);stroke:#fff;stroke-width:1.5}
+.hud footer{display:flex;gap:14px;font-size:11.5px;opacity:.8;margin-top:6px}.hud footer span::before{content:"";display:inline-block;width:12px;height:2px;background:#fff;margin-right:6px;vertical-align:middle}.hud footer span+span::before{background:var(--accent)}
+.prog{position:absolute;left:clamp(18px,2.6vw,38px);right:clamp(18px,2.6vw,38px);bottom:12px;height:2px;background:rgba(255,255,255,.2);z-index:5}.prog i{display:block;height:100%;width:100%;background:#fff;transform-origin:0 50%;transform:scaleX(0)}
+.hint{position:absolute;left:50%;top:76px;transform:translateX(-50%);z-index:5;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;transition:opacity .4s;display:flex;gap:8px;align-items:center}
+.hint::after{content:"";width:1px;height:26px;background:#fff;animation:nudge 1.6s ease-in-out infinite}@keyframes nudge{50%{transform:translateY(8px)}}
+
+.wrap{max-width:1320px;margin:0 auto;padding:0 clamp(20px,3vw,44px)}
+.say{padding:clamp(80px,13vh,150px) 0;display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.say h2{font-size:clamp(28px,3.4vw,50px);font-weight:500;letter-spacing:-.035em;line-height:1.08;margin:0}
+.say p{font-size:18px;color:var(--muted);max-width:26em;align-self:end;justify-self:end}
+.row{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,5vw,80px);align-items:center;padding:0 0 clamp(60px,9vh,110px)}
+.row:nth-child(even) .pic{order:-1}
+.row small{font-size:13px;color:var(--muted)}.row h3{font-size:clamp(24px,2.6vw,38px);font-weight:500;letter-spacing:-.03em;line-height:1.1;margin:14px 0}
+.row p{color:var(--muted);font-size:16.5px;max-width:26em}
+.pic{border-radius:14px;overflow:hidden;aspect-ratio:16/10;background:#ddd}.pic img{width:100%;height:100%;object-fit:cover}
+.pic.lensbox{background:#e9e5de;display:grid;place-items:center}
+.lens{position:relative;width:62%;aspect-ratio:1;border-radius:50%;box-shadow:0 0 0 1px rgba(22,21,19,.35),0 30px 50px -28px rgba(22,21,19,.6)}.lens canvas{position:absolute;inset:0;width:100%;height:100%;border-radius:50%}
+.end{border-top:1px solid var(--line);padding:clamp(60px,9vh,100px) 0 40px;display:flex;gap:30px;align-items:end;flex-wrap:wrap}
+.end h2{font-size:clamp(28px,3.6vw,54px);font-weight:500;letter-spacing:-.035em;line-height:1.05;margin:0 auto 0 0;max-width:13em}
+.btn{display:inline-flex;align-items:center;height:48px;padding:0 22px;border-radius:999px;background:var(--ink);color:var(--bg);font-size:15px;font-weight:500}
+.cred{font-size:12px;color:var(--muted);padding:0 0 36px}
+@media(max-width:860px){.nav a:not(.brand){display:none}.say,.row{grid-template-columns:1fr}.say p{justify-self:start}.row:nth-child(even) .pic{order:0}.copy{width:auto;right:18px;bottom:170px}.hud{width:auto;left:18px;right:18px;padding:10px 14px 8px}.hud svg{display:none}.hud footer{display:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><filter id="lb" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3.2"/></filter></defs></svg>
+
+<section class="story" id="story">
+  <div class="stage">
+    <div class="world" id="world">
+      <img class="sky" id="sky" src="assets/img/himmel.jpg" alt="">
+      <svg><circle class="sunring" id="sunring" cx="1220" cy="430" r="62"/><text class="sunlab" x="1296" y="390">Sonne</text><path class="trk" id="trk" style="opacity:0"/><path class="trk" id="trk2" style="opacity:0"/></svg>
+    </div>
+    <div class="scrim"></div>
+    <header class="nav">
+      <a class="brand" href="#"><svg viewBox="0 0 100 100"><g filter="url(#lb)"><circle cx="33" cy="62" r="22" fill="#F26938"/><circle cx="67" cy="60" r="22" fill="#0097B2"/><circle cx="50" cy="38" r="23" fill="#F38D03"/></g></svg>Nuno Labs</a>
+      <a href="#technik">Technik</a><a href="a2-direktvermarkter.html">Lösungen</a><a href="karriere-a.html">Karriere</a><a href="index.html">Alle Entwürfe</a><a href="mailto:hello@nuno-labs.de">Kontakt</a>
+    </header>
+    <span class="hint" id="hint">Scrollen, um die Zeit laufen zu lassen</span>
+    <div class="copy" id="copy">
+      <div><small>Nuno Labs · Solar-Nowcasting</small><h1>Wir sagen voraus, was Ihr Solarpark in 15 Minuten liefert.</h1></div>
+      <div><small>01 · Erkennen</small><h2>Die Kamera am Park erfasst jede Wolke am Himmel.</h2><p>Form, Größe, Richtung und Tempo, Bild für Bild.</p></div>
+      <div><small>02 · Verfolgen</small><h2>Das Modell berechnet, welche Wolke die Sonne trifft.</h2><p>Die meisten ziehen vorbei. Diese eine nicht.</p></div>
+      <div><small>03 · Vorhersagen · Schatten in <span id="cd">02:00</span></small><h2>Der Einbruch steht in der Prognose, der Park liefert noch voll.</h2><p>Jetzt ist Zeit zu handeln, zu regeln oder den Speicher umzuplanen.</p></div>
+      <div><small>04 · Eintreffen</small><h2>Die Wolke steht vor der Sonne. Die Leistung fällt wie vorhergesagt.</h2></div>
+      <div><small>Und weiter</small><h2>Die Sonne ist wieder frei. Die nächste Wolke ist schon erfasst.</h2></div>
+    </div>
+    <aside class="hud">
+      <header><span>Leistung Solarpark</span><b><span id="mw">38,6</span><em>MW</em></b></header>
+      <svg viewBox="0 0 320 96"><line class="g" x1="0" x2="320" y1="10" y2="10"/><line class="g" x1="0" x2="320" y1="88" y2="88"/><path class="f" id="fc"/><path class="m" id="me"/><line class="n" id="nowl" y1="2" y2="92"/><circle class="d" id="dot" r="4"/></svg>
+      <footer><span>Gemessen</span><span>Nuno-Prognose</span></footer>
+    </aside>
+    <div class="prog"><i id="bar"></i></div>
+  </div>
+</section>
+
+<div class="wrap">
+  <section class="say" id="technik">
+    <h2 data-reveal>Nuno Labs baut Kurzfristprognosen für Solarparks, mit einer eigenen Kamera am Standort.</h2>
+    <p data-reveal>Wettermodelle kennen den Tag. Wir kennen die Wolke, die in sieben Minuten über Ihrem Park steht.</p>
+  </section>
+  <div>
+    <div class="row" data-reveal><div><small>Sensor-Hub</small><h3>Eine Kamera, die den ganzen Himmel sieht.</h3><p>Der Sensor-Hub steht am Park und beobachtet den Himmel von Horizont zu Horizont, Bild für Bild.</p></div><div class="pic lensbox"><div class="lens" data-lens></div></div></div>
+    <div class="row" data-reveal><div><small>Modell</small><h3>Aus Wolken werden Megawatt.</h3><p>Unser Modell erkennt jede Wolke, verfolgt ihre Zugbahn und berechnet, wann ihr Schatten welche Module trifft.</p></div><div class="pic"><img src="assets/img/sonne-hinter-wolke.jpg" alt="Sonne hinter einer Wolke" loading="lazy"></div></div>
+    <div class="row" data-reveal><div><small>Prognose</small><h3>Die Zahl kommt dort an, wo Sie entscheiden.</h3><p>Leistung je Viertelstunde für die nächsten Minuten bis zwei Stunden, per API in Ihr Handels- oder Leitsystem.</p></div><div class="pic"><img src="assets/img/park-weit.jpg" alt="Solarpark aus der Luft" loading="lazy"></div></div>
+  </div>
+  <section class="end"><h2>Sehen Sie die Prognose an einem Ihrer eigenen Parks.</h2><a class="btn" href="mailto:hello@nuno-labs.de">Demo anfragen</a></section>
+  <p class="cred">Himmel und Wolken: echte Fotos von Wikimedia Commons, freigestellt (Quellen in assets/img/QUELLEN.txt). Erkennung, Zeiten und Leistung sind illustrativ.</p>
+</div>
+
+<script>
+(function () {
+  const SUN = [1220, 430], PMAX = 38.6;
+  const ss = (a, b, v) => { const t = Math.min(1, Math.max(0, (v - a) / (b - a))); return t * t * (3 - 2 * t); };
+  const mmss = s => String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(Math.floor(s % 60)).padStart(2, '0');
+  /* Wolken: Bild, Breite, Bahn (x = x0 + p*vx, y = y0 + p*vy), wann erkannt, wann eingeordnet, ob sie die Sonne trifft */
+  const C = [
+    { id: '01', src: 'wolke-b.png', w: 350, r: 1, flip: 0, x0: 300, vx: 2250, y0: -20, vy: 30, det: .07, cls: .19, hit: 0 },
+    { id: '02', src: 'wolke-a.png', w: 580, r: 589 / 767, flip: 0, x0: -660, vx: 2600, y0: 170, vy: 60, det: .13, cls: .30, hit: 1, t0: .53, t1: .75 },
+    { id: '03', src: 'wolke-b.png', w: 330, r: 1, flip: 1, x0: -1500, vx: 2500, y0: 0, vy: 20, det: .62, cls: .74, hit: 0 },
+    { id: '04', src: 'wolke-a.png', w: 520, r: 589 / 767, flip: 1, x0: -2100, vx: 2700, y0: 190, vy: 50, det: .84, cls: .93, hit: 1, t0: 1.18, t1: 1.4 }
+  ];
+  const world = document.getElementById('world'), sky = document.getElementById('sky');
+  C.forEach(c => {
+    const el = document.createElement('div'); el.className = 'cloud'; el.style.width = c.w + 'px';
+    el.innerHTML = `<img src="assets/img/${c.src}" alt="" style="${c.flip ? 'transform:scaleX(-1)' : ''}"><div class="det${c.hit ? ' hit' : ''}"><i></i><i></i><i></i><i></i><b>Wolke ${c.id} · 9,4 m/s</b><span></span></div>`;
+    world.insertBefore(el, world.querySelector('svg')); c.el = el; c.d = el.querySelector('.det'); c.s = el.querySelector('span'); c.h = c.w * c.r;
+  });
+  const cover = p => { const c = C[1]; return ss(c.t0, c.t0 + .07, p) * (1 - ss(c.t1 - .07, c.t1, p)); };
+  const power = p => PMAX * (1 - .7 * cover(p)) + .25 * Math.sin(p * 90) + .15 * Math.sin(p * 37);
+  const gx = p => 4 + 312 * p, gy = v => 88 - (v / 42) * 78;
+  const copy = [...document.querySelectorAll('#copy div')], bounds = [.10, .26, .44, .56, .80, 2];
+  const $ = id => document.getElementById(id), story = $('story');
+  let target = 0, p = 0, last = -1, t = 0;
+  function fit() { const s = Math.max(innerWidth / 1920, innerHeight / 1080); world.style.transform = 'scale(' + s + ')'; }
+  function read() { const r = story.getBoundingClientRect(), h = r.height - innerHeight; target = Math.min(1, Math.max(0, -r.top / h)); }
+  function draw() {
+    t += .016;
+    C.forEach((c, i) => {
+      const x = c.x0 + p * c.vx + 10 * Math.sin(t * .35 + i * 2), y = c.y0 + p * c.vy + 6 * Math.sin(t * .28 + i);
+      c.x = x; c.y = y; c.el.style.transform = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0)`;
+      const cx = x + c.w / 2, cy = y + c.h / 2, vis = cx > -100 && cx < 2020;
+      c.d.classList.toggle('on', p >= c.det && vis); c.d.classList.toggle('cls', p >= c.cls);
+      let txt = 'zieht vorbei';
+      if (c.hit) txt = p < c.t0 ? 'trifft die Sonne in ' + mmss((c.t0 - p) * 1500) : p < c.t1 ? 'verdeckt die Sonne' : 'durchgezogen';
+      if (c.s.textContent !== txt) c.s.textContent = txt;
+    });
+    const a = C[1], b = C[3], line = (c, el) => { const on = p >= c.cls && p < c.t0 + .02; el.style.opacity = on ? 1 : 0; if (on) el.setAttribute('d', `M${(c.x + c.w * .78).toFixed(0)} ${(c.y + c.h * .55).toFixed(0)}L${SUN[0] - 66} ${SUN[1]}`); };
+    line(a, $('trk')); line(b, $('trk2'));
+    const cv = cover(p);
+    sky.style.filter = cv > .01 ? `brightness(${(1 - .2 * cv).toFixed(3)})` : '';
+    a.el.querySelector('img').style.filter = `drop-shadow(0 0 ${(22 + 40 * cv).toFixed(0)}px rgba(255,255,255,${(.12 + .5 * cv).toFixed(2)})) brightness(${(1 - .16 * cv).toFixed(3)})`;
+    $('sunring').style.opacity = 1 - .6 * cv;
+    let k = bounds.findIndex(v => p < v); copy.forEach((d, i) => d.classList.toggle('on', i === k));
+    $('hint').style.opacity = p < .03 ? .85 : 0; $('bar').style.transform = 'scaleX(' + p.toFixed(4) + ')';
+    $('mw').textContent = power(p).toFixed(1).replace('.', ','); $('cd').textContent = mmss(Math.max(0, (a.t0 - p) * 1500));
+    let m = '', f = ''; const known = p >= a.cls;
+    for (let q = 0; q <= 1.0001; q += .01) { const pt = gx(q).toFixed(1) + ' ' + gy(q <= p ? power(q) : (known ? PMAX * (1 - .7 * cover(q)) : PMAX)).toFixed(1); if (q <= p) m += (m ? 'L' : 'M') + pt; if (q >= p - .005) f += (f ? 'L' : 'M') + pt; }
+    m += 'L' + gx(p).toFixed(1) + ' ' + gy(power(p)).toFixed(1);
+    $('me').setAttribute('d', m); $('fc').setAttribute('d', f);
+    $('nowl').setAttribute('x1', gx(p)); $('nowl').setAttribute('x2', gx(p)); $('dot').setAttribute('cx', gx(p)); $('dot').setAttribute('cy', gy(power(p)));
+  }
+  const forced = parseFloat(new URLSearchParams(location.search).get('p'));
+  function loop() { if (isNaN(forced)) { read(); p += (target - p) * .1; if (Math.abs(target - p) < .0002) p = target; } else p = forced; draw(); requestAnimationFrame(loop); }
+  addEventListener('resize', fit); fit(); loop();
+})();
+</script>
+<script src="assets/nuno.js"></script><script src="assets/sky.js"></script>
+</body>
+</html>

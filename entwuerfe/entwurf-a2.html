@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wir sehen den Schatten, bevor er fällt – Nuno Labs · Entwurf A2</title>
+<link rel="icon" href="assets/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css"><link rel="stylesheet" href="assets/a2.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><filter id="lb" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3.2"/></filter></defs></svg>
+<div class="wrap">
+<header class="nav"><div class="in">
+  <a class="brand" href="entwurf-a2.html"><svg viewBox="0 0 100 100"><g filter="url(#lb)"><circle cx="33" cy="62" r="22" fill="#F26938"/><circle cx="67" cy="60" r="22" fill="#0097B2"/><circle cx="50" cy="38" r="23" fill="#F38D03"/></g></svg>Nuno Labs</a>
+  <a href="entwurf-a2.html#technologie">Technologie</a>
+  <div class="dd" tabindex="0"><span class="">Lösungen</span><div><a href="a2-direktvermarkter.html">Direktvermarkter</a><a href="a2-anlagenbetreiber.html">Anlagenbetreiber</a><a href="a2-netzbetreiber.html">Netzbetreiber</a><a href="a2-batteriespeicher.html">Batteriespeicher</a></div></div>
+  <a href="entwurf-a2.html#team">Team</a><a href="karriere-a.html">Karriere</a><a href="index.html">Alle Entwürfe</a>
+  <a class="btn dark" href="mailto:hello@nuno-labs.de">Demo anfragen</a>
+</div></header>
+
+<section class="hero" data-field>
+  <p class="origin" data-reveal><b>TUM Spin-off</b> aus München · gefördert durch <b>EXIST</b></p>
+  <h1 data-reveal style="--d:.08s">Wir sehen den Schatten, bevor er fällt.</h1>
+  <p class="lead" data-reveal style="--d:.16s">Nuno Labs beobachtet den Himmel direkt über Ihrem Solarpark und sagt, was er in den nächsten Minuten liefert. Für Handel, Netz und Speicher.</p>
+  <div class="cta" data-reveal style="--d:.24s"><a class="btn dark" href="mailto:hello@nuno-labs.de">Demo anfragen <svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="btn ghost" href="#technologie">So funktioniert es</a></div>
+
+  <div class="stage" data-reveal style="--d:.3s">
+    <figure class="lensfig"><div class="lens" data-lens><b>N</b><b>S</b><b>W</b><b>O</b></div><figcaption><strong>Himmelskamera</strong><span>Blick des Sensor-Hubs nach oben</span></figcaption></figure>
+    <figure class="parkfig"><div class="park" data-park data-cols="18" data-rows="6"></div>
+      <figcaption><strong>Solarpark Nord</strong><span>42 MWp</span><span class="hub">Sensor-Hub am Park</span><span class="mw num"><b data-o="now">38,6</b> MW</span></figcaption></figure>
+  </div>
+
+  <div class="product" data-reveal>
+    <div class="p-top"><strong>Leistung</strong><span>gemessen und vorhergesagt</span><span>Zeitraffer 6×</span><span class="chip" data-o="next">Freie Sicht für 15 Minuten</span></div>
+    <div class="p-chart"><div data-strip></div></div>
+    <div class="legend"><span><i></i>Gemessen</span><span class="f"><i></i>Nuno-Prognose</span><span class="n"><i></i>Wettermodell</span></div>
+    <div class="kpis">
+      <div class="kpi"><small>Jetzt</small><b class="num"><span data-o="now">38,6</span><em>MW</em></b></div>
+      <div class="kpi"><small>In 5 Minuten</small><b class="num"><span data-o="p5">38,6</span><em>MW</em></b></div>
+      <div class="kpi"><small>In 10 Minuten</small><b class="num"><span data-o="p10">38,6</span><em>MW</em></b></div>
+      <div class="kpi"><small>In 15 Minuten</small><b class="num"><span data-o="p15">38,6</span><em>MW</em></b></div>
+    </div>
+  </div>
+  <p class="note">Simulation zur Illustration: Kamera, Schatten und Kurve zeigen dasselbe Wolkenfeld.</p>
+</section>
+
+<section class="block" id="technologie">
+  <div class="head"><span class="eyebrow" data-reveal>Technologie</span>
+    <h2 data-reveal>Satelliten sehen das Wetter. Wir sehen die Wolke über Ihrem Park.</h2>
+    <p class="lead" data-reveal>Wettermodelle und Satellitenbilder sind zu grob für die nächste Viertelstunde. Genau dort entscheidet sich, ob Ihre Position aufgeht.</p></div>
+  <div class="cards3">
+    <div class="card" data-reveal><span class="step">01 · Sehen</span><h3>Ein Sensor-Hub direkt am Park.</h3><p>Eine Fisheye-Kamera beobachtet den ganzen Himmel über der Anlage, Bild für Bild.</p></div>
+    <div class="card" data-reveal style="--d:.08s"><span class="step">02 · Verstehen</span><h3>Ein Modell, das Wolken in Megawatt übersetzt.</h3><p>Es erkennt jede Wolke, verfolgt ihre Zugbahn und berechnet, wann ihr Schatten welche Module trifft.</p></div>
+    <div class="card ink" data-reveal style="--d:.16s"><span class="step">03 · Liefern</span><h3>Eine API, die in Ihr System passt.</h3><p>Die Prognose kommt dort an, wo Sie handeln und steuern.</p>
+<pre><b>GET</b> /v1/sites/park-nord/forecast
+{ "resolution": <b>"15min"</b>, "unit": <b>"MW"</b>,
+  "items": [ { "t": "11:45", "p50": <i>36.0</i> } ] }</pre></div>
+  </div>
+</section>
+
+<section class="block" id="loesungen">
+  <div class="head"><span class="eyebrow" data-reveal>Lösungen</span><h2 data-reveal>Eine Prognose. Vier Wege, mit ihr mehr zu erreichen.</h2></div>
+  <div class="cases"><a class="case" href="a2-direktvermarkter.html" data-reveal style="--d:0.00s"><header><span>Handel</span><span class="go"><svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></header><h3>Direktvermarkter</h3><p>Handeln Sie die Rampe, statt sie als Ausgleichsenergie zu bezahlen.</p></a><a class="case" href="a2-anlagenbetreiber.html" data-reveal style="--d:0.06s"><header><span>Erzeugung</span><span class="go"><svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></header><h3>Anlagenbetreiber</h3><p>Derselbe Park, besser prognostiziert, besser vermarktet.</p></a><a class="case" href="a2-netzbetreiber.html" data-reveal style="--d:0.12s"><header><span>Netz</span><span class="go"><svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></header><h3>Netzbetreiber</h3><p>Die Einspeisung der nächsten zwei Stunden, Park für Park.</p></a><a class="case" href="a2-batteriespeicher.html" data-reveal style="--d:0.18s"><header><span>Speicher</span><span class="go"><svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></header><h3>Batteriespeicher</h3><p>Co-Location fahren, als wüssten Sie, was die Sonne vorhat.</p></a></div>
+</section>
+
+<section class="block"><p class="statement" data-words>Solarstrom wird zur größten Energiequelle Europas. Wer ihn handelt, speichert oder durchs Netz leitet, braucht mehr als eine Wettervorhersage. Wir bauen die Prognose-Infrastruktur für das Solarzeitalter.</p></section>
+
+<section class="block" id="team">
+  <div class="head"><span class="eyebrow" data-reveal>Team</span><h2 data-reveal>Mathematik, Robotik und Energiewirtschaft an einem Tisch.</h2><p class="lead" data-reveal>Ein Team aus TU München, Cambridge und Stanford.</p></div>
+  <div class="team">
+    <div class="person" data-reveal><img src="assets/david.jpg" alt="David Dietz" loading="lazy"><h3>David Dietz</h3><p>Mathematics &amp; Management</p></div>
+    <div class="person" data-reveal style="--d:.08s"><img src="assets/benjamin.jpg" alt="Benjamin Obermeier" loading="lazy"><h3>Benjamin Obermeier</h3><p>Robotics, Cognition, Intelligence</p></div>
+    <div class="person" data-reveal style="--d:.16s"><img src="assets/naomi.jpg" alt="Naomi Jaguttis" loading="lazy"><h3>Naomi Jaguttis</h3><p>Management &amp; Sustainable Energies</p></div>
+  </div>
+</section>
+<section class="final" data-reveal>
+  <div class="orbs"><i></i><i></i><i></i></div>
+  <h2>Der nächste Schatten ist unterwegs. Reden wir vorher.</h2>
+  <a class="btn" href="mailto:hello@nuno-labs.de">Demo anfragen <svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</section>
+<footer><a class="brand" href="entwurf-a2.html"><svg viewBox="0 0 100 100"><g filter="url(#lb)"><circle cx="33" cy="62" r="22" fill="#F26938"/><circle cx="67" cy="60" r="22" fill="#0097B2"/><circle cx="50" cy="38" r="23" fill="#F38D03"/></g></svg>Nuno Labs</a><span style="margin-right:auto">TUM Spin-off · München</span><a href="karriere-a.html">Karriere</a><a href="mailto:hello@nuno-labs.de">hello@nuno-labs.de</a><a href="https://www.linkedin.com/company/108688273/">LinkedIn</a><a href="https://nuno-labs.de/impressum">Impressum</a></footer>
+</div>
+<script src="assets/nuno.js"></script><script src="assets/sky.js"></script>
+</body>
+</html>

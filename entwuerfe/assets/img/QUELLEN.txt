@@ -1,0 +1,56 @@
+Bildquellen (Wikimedia Commons)
+
+Die Fotos in diesem Ordner sind Platzhalter für die Entwürfe. Sie wurden verkleinert und teils beschnitten, gespiegelt oder eingefärbt.
+
+park-weit.jpg
+  Titel: BRBHavel asv2022-07 img17 Solarpark.jpg
+  Urheber: A.Savin
+  Lizenz: FAL http://artlibre.org/licence/lal/en
+  Quelle: https://commons.wikimedia.org/wiki/File%3ABRBHavel_asv2022-07_img17_Solarpark.jpg
+
+park-horizont.jpg
+  Titel: BRBHavel asv2022-07 img16 Solarpark.jpg
+  Urheber: A.Savin
+  Lizenz: FAL http://artlibre.org/licence/lal/en
+  Quelle: https://commons.wikimedia.org/wiki/File%3ABRBHavel_asv2022-07_img16_Solarpark.jpg
+
+park-felder.jpg
+  Titel: Nottuln, Appelhülsen, Solarpark -- 2014 -- 3970.jpg
+  Urheber: Dietmar Rabich
+  Lizenz: CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0
+  Quelle: https://commons.wikimedia.org/wiki/File%3ANottuln%2C_Appelh%C3%BClsen%2C_Solarpark_--_2014_--_3970.jpg
+
+wolken-dramatisch.jpg
+  Titel: Sky 20260926.jpg
+  Urheber: Christopher J. Fynn
+  Lizenz: CC0 http://creativecommons.org/publicdomain/zero/1.0/deed.en
+  Quelle: https://commons.wikimedia.org/wiki/File%3ASky_20260926.jpg
+
+wolke-sonne.jpg
+  Titel: White Cumulus Clouds against Blue Sky with Sun Shining.jpg
+  Urheber: Lance Vanlewen
+  Lizenz: CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0
+  Quelle: https://commons.wikimedia.org/wiki/File%3AWhite_Cumulus_Clouds_against_Blue_Sky_with_Sun_Shining.jpg
+
+cumulus.jpg
+  Titel: White Cumulus Clouds against Blue Sky (4).jpg
+  Urheber: Lance Vanlewen
+  Lizenz: CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0
+  Quelle: https://commons.wikimedia.org/wiki/File%3AWhite_Cumulus_Clouds_against_Blue_Sky_%284%29.jpg
+
+sonne-hinter-wolke.jpg
+  Titel: Summer clouds over Tuntorp 3.jpg
+  Urheber: W.carter
+  Lizenz: CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0
+  Quelle: https://commons.wikimedia.org/wiki/File%3ASummer_clouds_over_Tuntorp_3.jpg
+
+sonne-durchbruch.jpg
+  Titel: 2021-07-28 18 37 38 Crepuscular rays as the sun peaks through some towering cumulus clouds along Tranquility Court in the Franklin Farm section of Oak Hill, Fairfax County, Virginia.jpg
+  Urheber: Famartin
+  Lizenz: CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0
+  Quelle: https://commons.wikimedia.org/wiki/File%3A2021-07-28_18_37_38_Crepuscular_rays_as_the_sun_peaks_through_some_towering_cumulus_clouds_along_Tranquility_Court_in_the_Franklin_Farm_section_of_Oak_Hill%2C_Fairfax_County%2C_Virginia.jpg
+
+Abgeleitete Dateien
+  wolke-a.png, wolke-c.png, himmel.jpg: aus wolke-sonne.jpg freigestellt bzw. retuschiert (Wolken entfernt, Sonne durch Spiegelung ergänzt).
+  wolke-b.png: aus cumulus.jpg freigestellt.
+  Diese Bearbeitungen stehen unter derselben Lizenz wie das jeweilige Ausgangsbild.

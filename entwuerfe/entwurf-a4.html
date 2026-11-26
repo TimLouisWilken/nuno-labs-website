@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kurzfristprognosen für Solarparks – Nuno Labs · Entwurf A4</title>
+<link rel="icon" href="assets/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css"><link rel="stylesheet" href="assets/a4.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><filter id="lb" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3.2"/></filter></defs></svg>
+<header class="top">
+  <a class="brand" href="entwurf-a4.html"><svg viewBox="0 0 100 100"><g filter="url(#lb)"><circle cx="33" cy="62" r="22" fill="#F26938"/><circle cx="67" cy="60" r="22" fill="#0097B2"/><circle cx="50" cy="38" r="23" fill="#F38D03"/></g></svg>Nuno Labs</a>
+  <a href="entwurf-a4.html#prinzip">Messprinzip</a><a href="entwurf-a4.html#wer">Für wen</a><a href="entwurf-a4.html#team">Team</a><a href="karriere-a.html">Karriere</a><a href="index.html">Alle Entwürfe</a><a class="k" href="mailto:hello@nuno-labs.de">Kontakt</a>
+</header>
+<main class="doc">
+<nav class="toc"><div><b>Inhalt</b><a href="#problem"><span>1</span>Das Problem</a><a href="#prinzip"><span>2</span>Das Messprinzip</a><a href="#wer"><span>3</span>Für wen</a><a href="#api"><span>4</span>Die Schnittstelle</a><a href="#team"><span>5</span>Wer wir sind</a><a href="#kontakt"><span>6</span>Kontakt</a></div></nav>
+
+<p class="meta">Nuno Labs · München · Stand November 2026</p>
+<h1>Kurzfristprognosen für Solarparks, gemessen am Himmel über der Anlage</h1>
+<p class="abstract">Wir stellen eine Kamera an den Solarpark, die den Himmel beobachtet. Aus ihren Bildern berechnen wir, wie viel Strom der Park in den nächsten Minuten bis zwei Stunden liefert. Die Prognose richtet sich an Direktvermarkter, Netzbetreiber und Speicherbetreiber, also an alle, für die die nächste Viertelstunde zählt.</p>
+
+<figure class="wide">
+  <div class="plate" data-field>
+    <span class="ann a"><b>Himmelskamera</b><br>Blick nach oben</span>
+    <span class="ann b"><b>Solarpark Nord, 42 MWp</b><br>Leistung jetzt <b data-o="now">38,6</b> MW</span>
+    <span class="ann c pv"><b data-o="pv">Live</b> · <span data-o="next">Freie Sicht für 15 Minuten</span></span>
+    <div class="lens" data-lens></div>
+    <div class="park" data-park data-cols="20" data-rows="7"></div>
+  </div>
+  <figcaption><b>Abb. 1</b>Links der Blick der Himmelskamera, rechts der Solarpark von oben. Beide zeigen dasselbe simulierte Wolkenfeld, sechsfach beschleunigt. Der orange Punkt ist die Sonne. Schiebt sich eine Wolke davor, liegt ihr Schatten auf den Modulen.</figcaption>
+</figure>
+
+<h2 id="problem"><span>1</span>Das Problem</h2>
+<p>Die Leistung eines Solarparks hängt an jeder einzelnen Wolke. Zieht eine vor die Sonne, fällt die Einspeisung innerhalb von Sekunden auf einen Bruchteil und kommt genauso schnell zurück.</p>
+<p>Wettermodelle rechnen auf einem Raster von einigen Kilometern, Satellitenbilder kommen mit Verzögerung. Beide beschreiben den Tag recht gut. Die Wolke, die in sieben Minuten über einem bestimmten Park steht, beschreiben sie nicht.</p>
+<p>Genau in diesem Zeitfenster wird aber gehandelt und geregelt. Strom wird in Viertelstunden gehandelt, und der Intraday-Markt schließt fünf Minuten vor Lieferung.<sup>1</sup> Wer bis dahin nicht weiß, was sein Park liefert, gleicht die Abweichung anschließend über Ausgleichsenergie aus.</p>
+<aside><b>1</b>Innerhalb einer Regelzone. Über Regelzonen hinweg schließt der Handel 30 Minuten vor Lieferung.</aside>
+
+<h2 id="prinzip"><span>2</span>Das Messprinzip</h2>
+<p>Unser Sensor-Hub steht direkt am Park. Seine Fisheye-Kamera sieht den gesamten Himmel von Horizont zu Horizont (Abb. 1, links).</p>
+<p>Ein Modell erkennt in jedem Bild die Wolken, verfolgt ihre Bewegung und berechnet, wann welcher Schatten auf welche Modulfläche fällt. Daraus entsteht eine Leistungsprognose für die nächsten Minuten bis zwei Stunden.</p>
+<p>Abb. 2 zeigt das Ergebnis. Die orange Kurve fällt, bevor die schwarze es tut: Der Einbruch steht in der Prognose, während der Park noch voll liefert.</p>
+
+<figure class="wide">
+  <div class="chartbox"><span class="ann b pv"><b data-o="pv">Live</b></span><div data-strip></div>
+    <div class="legend"><span><i></i>Gemessen</span><span class="f"><i></i>Nuno-Prognose</span><span class="n"><i></i>Wettermodell</span></div></div>
+  <figcaption><b>Abb. 2</b>Leistung des Parks aus Abb. 1 in Megawatt: fünf Minuten zurück, fünfzehn voraus. Wenn Sie mit der Maus über den orangen Teil fahren, zeigt Abb. 1 den Himmel und den Park zu diesem Zeitpunkt. Simulation zur Illustration, keine Messdaten.</figcaption>
+</figure>
+
+<table class="kv">
+  <tr><td>Messung</td><td>Fisheye-Kamera am Standort</td></tr>
+  <tr><td>Horizont</td><td>wenige Minuten bis zwei Stunden</td></tr>
+  <tr><td>Auflösung</td><td>15 Minuten</td></tr>
+  <tr><td>Übergabe</td><td>per API in Ihr Handels- oder Leitsystem</td></tr>
+</table>
+
+<h2 id="wer"><span>3</span>Für wen</h2>
+<p>Die Prognose ist für alle gedacht, die mit der Einspeisung eines Solarparks in den nächsten Minuten planen müssen. Vier Gruppen haben wir dabei vor Augen:</p>
+<table>
+  <tr><th>Wer</th><th>Wofür</th></tr>
+  <tr><td><a href="a4-direktvermarkter.html">Direktvermarkter</a></td><td>Intraday-Positionen anpassen, bevor eine Rampe im Zähler ankommt, und so weniger Ausgleichsenergie bezahlen.</td></tr><tr><td><a href="a4-anlagenbetreiber.html">Anlagenbetreiber</a></td><td>Einen Park anbieten, dessen Einspeisung sich kurzfristig verlässlich vorhersagen und damit besser vermarkten lässt.</td></tr><tr><td><a href="a4-netzbetreiber.html">Netzbetreiber</a></td><td>Die Einspeisung der nächsten zwei Stunden je Park kennen, als Grundlage für Redispatch und Engpassmanagement.</td></tr><tr><td><a href="a4-batteriespeicher.html">Batteriespeicher</a></td><td>Speicher und Solarpark am selben Netzanschluss gemeinsam fahren, ohne unnötig Reserve vorzuhalten.</td></tr>
+</table>
+
+<h2 id="api"><span>4</span>Die Schnittstelle</h2>
+<p>Sie fragen einen Standort ab und bekommen die erwartete Leistung je Viertelstunde zurück. Ein zusätzliches Dashboard, das jemand im Blick behalten muss, ist dafür nicht nötig.</p>
+<figure>
+<pre><b>GET</b> /v1/sites/park-nord/forecast
+
+{
+  "resolution": <b>"15min"</b>,
+  "unit": <b>"MW"</b>,
+  "items": [
+    { "t": "11:45", "p50": <i>36.0</i> },
+    { "t": "12:00", "p50": <i>31.4</i> }
+  ]
+}</pre>
+  <figcaption><b>Listing 1</b>Beispielhafte Abfrage. Das genaue Format stimmen wir mit Ihrem System ab.</figcaption>
+</figure>
+
+<h2 id="team"><span>5</span>Wer wir sind</h2>
+<p>Nuno Labs ist eine Ausgründung der TU München und wird durch EXIST gefördert. Gegründet haben uns David Dietz, Benjamin Obermeier und Naomi Jaguttis. Im Team arbeiten Menschen aus Mathematik, Robotik und Energiewirtschaft, mit Stationen an der TU München, in Cambridge und in Stanford.</p>
+<div class="people">
+  <div><img src="assets/david.jpg" alt="David Dietz" loading="lazy"><p><strong>David Dietz</strong>Mathematics &amp; Management</p></div>
+  <div><img src="assets/benjamin.jpg" alt="Benjamin Obermeier" loading="lazy"><p><strong>Benjamin Obermeier</strong>Robotics, Cognition, Intelligence</p></div>
+  <div><img src="assets/naomi.jpg" alt="Naomi Jaguttis" loading="lazy"><p><strong>Naomi Jaguttis</strong>Management &amp; Sustainable Energies</p></div>
+</div>
+<p>Wir suchen Verstärkung. Die <a href="karriere-a.html">offenen Stellen</a> stehen auf der Karriere-Seite.</p>
+
+<h2 id="kontakt"><span>6</span>Kontakt</h2>
+<p>Am einfachsten zeigen wir Ihnen die Prognose an einem Ihrer eigenen Parks. Schreiben Sie uns an <a href="mailto:hello@nuno-labs.de">hello@nuno-labs.de</a>, wir melden uns mit einem Terminvorschlag.</p>
+</main>
+<footer class="foot"><span>Nuno Labs · München · Ausgründung der TU München, gefördert durch EXIST</span><a href="mailto:hello@nuno-labs.de">hello@nuno-labs.de</a><a href="https://www.linkedin.com/company/108688273/">LinkedIn</a><a href="https://nuno-labs.de/impressum">Impressum</a></footer>
+<script src="assets/nuno.js"></script><script src="assets/sky.js"></script>
+</body>
+</html>

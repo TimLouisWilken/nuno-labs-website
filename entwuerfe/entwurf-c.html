@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nuno Labs – Entwurf C · Editorial</title>
+<link rel="icon" href="assets/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css">
+<style>
+:root{--bg:#fff;--card:#fff;--ink:#0b0b0b;--muted:#757575;--line:rgba(11,11,11,.12);--accent:#F26938;
+  --sky:#0b0b0b;--cloud:rgba(255,255,255,.85);--cloud-line:rgba(255,255,255,.5);--sky-line:rgba(255,255,255,.13);--sky-rim:#0b0b0b;--vec:#fff}
+.wrap{padding:0 clamp(20px,3.4vw,52px)}
+.small{font-size:13.5px;color:var(--muted)}
+h1,h2,h3{font-weight:600;text-wrap:balance}
+.u{box-shadow:inset 0 -1px 0 var(--ink);padding-bottom:3px;transition:box-shadow .25s,color .25s}.u:hover{box-shadow:inset 0 -1px 0 var(--accent);color:var(--accent)}
+
+.nav{display:flex;align-items:center;gap:36px;height:76px;font-size:14.5px;position:relative;z-index:5}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:-.03em;font-size:18px;margin-right:auto}.brand svg{width:28px;height:28px}
+.nav a:not(.brand):not(.u){color:var(--muted)}.nav a:not(.brand):hover{color:var(--ink)}
+
+.hero{position:relative;padding:clamp(40px,9vh,90px) 0 0;min-height:min(calc(100vh - 76px),900px);display:flex;flex-direction:column}
+.hero .orbs{width:min(58vw,820px);right:-6vw;top:-80px;--orb-blur:clamp(28px,4vw,58px);--orb-o:.96}
+.hero h1{position:relative;font-size:clamp(52px,11.4vw,196px);letter-spacing:-.065em;line-height:.9;max-width:8.2em;mix-blend-mode:multiply}
+.hero h1 i{font-style:normal;color:var(--accent)}
+.hero-foot{position:relative;margin-top:auto;display:grid;grid-template-columns:1.2fr 1fr auto;gap:40px;align-items:end;padding:60px 0 34px;border-bottom:1px solid var(--line)}
+.hero-foot p{font-size:clamp(18px,1.6vw,23px);letter-spacing:-.02em;line-height:1.35;max-width:26em}
+.hero-foot ul{list-style:none;margin:0;padding:0;font-size:14px;color:var(--muted);display:grid;gap:4px}
+.big-link{font-size:clamp(18px,1.6vw,23px);font-weight:500;letter-spacing:-.02em;display:inline-flex;gap:10px;align-items:center}
+.big-link svg{width:16px;height:16px;transition:transform .25s}.big-link:hover svg{transform:translate(3px,-3px)}
+
+.sec{display:grid;grid-template-columns:minmax(160px,22%) 1fr;gap:40px;padding:140px 0 0}
+.sec>aside{position:sticky;top:30px;align-self:start;display:grid;gap:6px}
+.sec>aside b{font-size:14px;font-weight:500}.sec>aside span{font-size:14px;color:var(--muted)}
+.sec h2{font-size:clamp(34px,5.4vw,88px);letter-spacing:-.055em;line-height:.98;max-width:13em}
+.sec .sub{font-size:clamp(17px,1.4vw,20px);color:var(--muted);max-width:32em;margin-top:26px;letter-spacing:-.01em}
+.big-p{font-size:clamp(30px,4.8vw,78px);font-weight:600;letter-spacing:-.055em;line-height:1}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink);margin-top:64px}
+.kpis div{padding:18px 0 30px;display:grid;gap:14px}
+.kpis b{font-size:clamp(34px,5vw,76px);font-weight:600;letter-spacing:-.06em;line-height:1}.kpis b em{font-style:normal;font-size:14px;font-weight:450;color:var(--muted);margin-left:6px;letter-spacing:0}
+.frame{border:1px solid var(--line);padding:30px 26px 14px}
+.legend{display:flex;gap:24px;flex-wrap:wrap;font-size:13px;color:var(--muted);padding:14px 0 0}
+.legend span{display:flex;align-items:center;gap:8px}.legend i{width:18px;height:2px;background:var(--ink)}.legend .f i{background:var(--accent)}.legend .n i{background:none;border-top:2px dotted var(--muted)}
+
+.tech{display:grid;grid-template-columns:minmax(260px,.8fr) 1fr;gap:clamp(30px,6vw,110px);margin-top:70px;align-items:center}
+.tech ol{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.tech li{display:grid;grid-template-columns:60px 1fr;gap:10px;padding:26px 0 30px;border-bottom:1px solid var(--line)}
+.tech li>span{font-size:14px;color:var(--muted);padding-top:8px}
+.tech h3{font-size:clamp(24px,2.6vw,38px);letter-spacing:-.045em;line-height:1.05;margin-bottom:10px}
+.tech p{color:var(--muted);font-size:16px;max-width:30em}
+
+.grid4{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--ink);margin-top:70px}
+.grid4 a{padding:28px 30px 34px 0;border-bottom:1px solid var(--line);display:grid;gap:12px;min-height:270px;align-content:space-between;position:relative}
+.grid4 a:nth-child(even){padding-left:30px;border-left:1px solid var(--line)}
+.grid4 header{display:flex;justify-content:space-between;font-size:14px;color:var(--muted)}
+.grid4 header svg{width:18px;height:18px;color:var(--ink);transition:transform .3s,color .3s}
+.grid4 a:hover header svg{transform:translate(4px,-4px);color:var(--accent)}
+.grid4 h3{font-size:clamp(28px,3.6vw,56px);letter-spacing:-.055em;line-height:1}
+.grid4 p{color:var(--muted);font-size:16px;max-width:27em;margin-top:12px}
+
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:70px}
+.person img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:grayscale(1) contrast(1.05);transition:filter .5s}
+.person:hover img{filter:none}
+.person h3{font-size:20px;letter-spacing:-.035em;margin:16px 0 2px}.person p{font-size:14.5px;color:var(--muted)}
+
+.final{padding:170px 0 60px;position:relative}
+.final h2{font-size:clamp(40px,8vw,140px);letter-spacing:-.065em;line-height:.92;max-width:9em}
+.final .big-link{margin-top:44px;font-size:clamp(20px,2.4vw,34px)}
+footer{border-top:1px solid var(--line);overflow:hidden}
+footer .meta{display:flex;gap:28px;flex-wrap:wrap;padding:24px 0;font-size:13.5px;color:var(--muted)}footer .meta span:first-child{margin-right:auto}
+.wordmark{font-size:19.6vw;font-weight:600;letter-spacing:-.075em;line-height:.74;white-space:nowrap;margin:20px 0 -1.5vw -1.2vw;position:relative}
+.wordmark .orbs{width:20vw;right:1vw;top:-2vw;--orb-blur:1.4vw;--orb-o:.96}
+
+@media(max-width:900px){.nav a:not(.brand):not(.u){display:none}.hero-foot{grid-template-columns:1fr;gap:22px}.sec{grid-template-columns:1fr;padding-top:100px;gap:20px}.sec>aside{position:static;display:flex;gap:10px}.kpis{grid-template-columns:1fr 1fr}.tech,.grid4,.team{grid-template-columns:1fr}.grid4 a:nth-child(even){padding-left:0;border-left:0}.grid4 a{min-height:200px}.hero .orbs{width:90vw;right:-30vw}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><filter id="lb" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3.2"/></filter>
+<symbol id="mark" viewBox="0 0 100 100"><g filter="url(#lb)"><circle cx="33" cy="62" r="22" fill="#F26938"/><circle cx="67" cy="60" r="22" fill="#0097B2"/><circle cx="50" cy="38" r="23" fill="#F38D03"/></g></symbol>
+<symbol id="ne" viewBox="0 0 16 16"><path d="M3 13L13 3M5 3h8v8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol></defs></svg>
+
+<div class="wrap">
+<header class="nav">
+  <a class="brand" href="#"><svg><use href="#mark"/></svg>Nuno Labs</a>
+  <a href="#prognose">Prognose</a><a href="#technologie">Technologie</a><a href="#anwendungen">Anwendungen</a><a href="#team">Team</a><a href="karriere-c.html">Karriere</a><a href="index.html">Alle Entwürfe</a>
+  <a class="u" href="mailto:hello@nuno-labs.de">Demo anfragen</a>
+</header>
+
+<section class="hero">
+  <div class="orbs"><i></i><i></i><i></i></div>
+  <h1 data-reveal>Prognose-Infrastruktur für das Solar&shy;zeitalter<i>.</i></h1>
+  <div class="hero-foot" data-reveal style="--d:.15s">
+    <p>Nuno Labs sieht Wolken, bevor sie Ihren Solarpark erreichen, und sagt, wie viel Strom er in den nächsten Minuten liefert.</p>
+    <ul><li>TUM Spin-off, München</li><li>Gefördert durch EXIST</li><li>Team aus TU München, Cambridge, Stanford</li></ul>
+    <a class="big-link u" href="mailto:hello@nuno-labs.de">Demo anfragen <svg><use href="#ne"/></svg></a>
+  </div>
+</section>
+
+<section class="sec">
+  <aside><b>01</b><span>Das Problem</span></aside>
+  <div><p class="big-p" data-words>Eine einzelne Wolke nimmt einem Solarpark in Sekunden die halbe Leistung. Wettermodelle sind dafür zu grob, Satelliten zu spät. Wer Solarstrom handelt oder durchs Netz leitet, erfährt es erst, wenn es passiert ist.</p></div>
+</section>
+
+<section class="sec" id="prognose" data-chart-wrap>
+  <aside><b>02</b><span>Die Prognose</span></aside>
+  <div>
+    <h2 data-reveal>Die nächste Viertelstunde, bevor sie beginnt.</h2>
+    <p class="sub" data-reveal>Schwarz ist, was der Park liefert. Orange ist, was er gleich liefern wird.</p>
+    <div class="kpis" data-reveal>
+      <div><span class="small">Jetzt · <span class="num" data-out="time">11:00</span></span><b class="num"><span data-out="now">38,2</span><em>MW</em></b></div>
+      <div><span class="small">In 15 Minuten</span><b class="num"><span data-out="p15">36,0</span><em>MW</em></b></div>
+      <div><span class="small">In 30 Minuten</span><b class="num"><span data-out="p30">31,4</span><em>MW</em></b></div>
+      <div><span class="small">Rampe</span><b class="num" data-out="ramp">−6 %</b></div>
+    </div>
+    <div class="frame" data-reveal><div data-chart></div></div>
+    <div class="legend"><span><i></i>Gemessen</span><span class="f"><i></i>Nuno-Prognose</span><span class="n"><i></i>Wettermodell</span><span style="margin-left:auto">Solarpark Nord, 42 MWp. Beispieldaten.</span></div>
+  </div>
+</section>
+
+<section class="sec" id="technologie">
+  <aside><b>03</b><span>Die Technologie</span></aside>
+  <div>
+    <h2 data-reveal>Eine Kamera, die in den Himmel schaut. Ein Modell, das ihn versteht.</h2>
+    <div data-scene data-reveal style="margin-top:70px;--sc-r:0px"></div>
+  </div>
+</section>
+
+<section class="sec" id="anwendungen">
+  <aside><b>04</b><span>Anwendungen</span></aside>
+  <div>
+    <h2 data-reveal>Für alle, die mit Solarstrom Entscheidungen treffen.</h2>
+    <div class="grid4">
+      <a href="#" data-reveal><header><span>Handel</span><svg><use href="#ne"/></svg></header><div><h3>Direktvermarkter</h3><p>Intraday-Positionen schließen, bevor die Rampe kommt. Weniger Ausgleichsenergie im Portfolio.</p></div></a>
+      <a href="#" data-reveal><header><span>Erzeugung</span><svg><use href="#ne"/></svg></header><div><h3>Anlagenbetreiber</h3><p>Mehr Erlös aus demselben Park, weil die Prognose am Standort misst.</p></div></a>
+      <a href="#" data-reveal><header><span>Netz</span><svg><use href="#ne"/></svg></header><div><h3>Netzbetreiber</h3><p>Die Einspeisung der nächsten zwei Stunden kennen. Eine belastbare Grundlage für Redispatch.</p></div></a>
+      <a href="#" data-reveal><header><span>Speicher</span><svg><use href="#ne"/></svg></header><div><h3>Batterie-Optimierer</h3><p>PV und Speicher am selben Netzanschluss gemeinsam fahren, mit einem Fahrplan, der hält.</p></div></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="team">
+  <aside><b>05</b><span>Team</span></aside>
+  <div>
+    <h2 data-reveal>Mathematik, Robotik und Energiewirtschaft an einem Tisch.</h2>
+    <div class="team">
+      <div class="person" data-reveal><img src="assets/david.jpg" alt="David Dietz" loading="lazy"><h3>David Dietz</h3><p>Mathematics &amp; Management</p></div>
+      <div class="person" data-reveal style="--d:.08s"><img src="assets/benjamin.jpg" alt="Benjamin Obermeier" loading="lazy"><h3>Benjamin Obermeier</h3><p>Robotics, Cognition, Intelligence</p></div>
+      <div class="person" data-reveal style="--d:.16s"><img src="assets/naomi.jpg" alt="Naomi Jaguttis" loading="lazy"><h3>Naomi Jaguttis</h3><p>Management &amp; Sustainable Energies</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <h2 data-reveal>Sprechen wir über Ihren Park.</h2>
+  <a class="big-link u" href="mailto:hello@nuno-labs.de" data-reveal>hello@nuno-labs.de <svg><use href="#ne"/></svg></a>
+</section>
+</div>
+<footer><div class="wrap">
+  <div class="meta"><span>© 2026 Nuno Labs</span><a href="karriere-c.html">Karriere</a><a href="https://www.linkedin.com/company/108688273/">LinkedIn</a><a href="https://nuno-labs.de/impressum">Impressum</a></div>
+  <div class="wordmark">Nuno Labs</div>
+</div></footer>
+<script src="assets/nuno.js"></script>
+</body>
+</html>

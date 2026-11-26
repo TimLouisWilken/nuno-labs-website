@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nuno Labs – R4 · Wort</title>
+<link rel="icon" href="assets/logo.svg">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css">
+<style>
+:root{--bg:#0b0b0b;--ink:#f3f1ec;--muted:#8d8a84;--line:rgba(243,241,236,.18);--accent:#F26938;--card:#111}
+.hero{position:relative;height:min(100vh,1080px);min-height:620px;overflow:hidden;background:#111}
+.hero>svg{position:absolute;inset:0;width:100%;height:100%}
+.hero .im{filter:saturate(.55) brightness(.62) contrast(1.1);animation:slow 60s linear both}@keyframes slow{from{transform:scale(1)}to{transform:scale(1.1)}}
+.nav{position:absolute;left:0;right:0;top:0;z-index:3;display:flex;align-items:center;gap:30px;padding:24px clamp(18px,2.6vw,40px);font-size:13px;letter-spacing:.05em;text-transform:uppercase}
+.brand{display:flex;align-items:center;gap:9px;margin-right:auto;font-weight:600}.brand svg{width:26px;height:26px}
+.nav .j{color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);padding:6px 10px}
+.word{position:absolute;left:-.04em;right:0;bottom:-.17em;z-index:2;font-size:15.9vw;font-weight:700;letter-spacing:-.065em;line-height:1;white-space:nowrap;color:#fff;margin:0}
+.sub{position:absolute;z-index:3;left:clamp(18px,2.6vw,40px);top:22vh;max-width:370px;font-size:16px;line-height:1.45}
+.ov *{vector-effect:non-scaling-stroke}.ov path{fill:none;stroke:var(--accent);stroke-width:1.5}.ov text{fill:#fff;font-size:21px;font-weight:500;letter-spacing:.03em}.ov line{stroke:#fff;stroke-width:1}
+.sec{display:grid;grid-template-columns:1fr 1fr;min-height:min(74vh,700px);border-top:1px solid var(--line)}
+.sec .tx{padding:clamp(40px,7vw,110px) clamp(18px,2.6vw,40px);display:flex;flex-direction:column;justify-content:center}
+.sec h2{font-size:clamp(26px,3.2vw,46px);font-weight:500;letter-spacing:-.03em;line-height:1.06;margin:0 0 22px;max-width:12em}
+.sec p{color:var(--muted);font-size:16px;line-height:1.5;max-width:27em;margin-left:clamp(0px,6vw,90px)}
+.sec .ph{position:relative;overflow:hidden;background:#0f0f0f;min-height:420px}.sec .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.5) brightness(.75) contrast(1.08)}
+.sec .ph.cam{display:grid;place-items:center}
+.lens{position:relative;width:64%;aspect-ratio:1;border-radius:50%;box-shadow:0 0 0 1px rgba(255,255,255,.2)}.lens canvas{position:absolute;inset:0;width:100%;height:100%;border-radius:50%}
+.prod{border-top:1px solid var(--line);position:relative;height:min(56vh,520px);min-height:380px;overflow:hidden}
+.prod img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.4) brightness(.5)}
+.prod div{position:absolute;left:clamp(18px,2.6vw,40px);bottom:40px}.prod h3{font-size:clamp(22px,2.2vw,30px);font-weight:500;margin:0;letter-spacing:-.02em;line-height:1.15}.prod h3 span{display:block;color:var(--muted);font-weight:400}
+.prod a{display:inline-block;margin-top:16px;font-size:12.5px;padding:7px 11px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.6)}
+.cred{font-size:12px;color:var(--muted);padding:26px clamp(18px,2.6vw,40px) 36px;border-top:1px solid var(--line)}
+@media(max-width:860px){.nav a:not(.brand):not(.j){display:none}.sec{grid-template-columns:1fr}.sec p{margin-left:0}.sub{top:16vh}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><filter id="lb" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3.2"/></filter></defs></svg>
+<section class="hero">
+  <svg viewBox="0 0 1920 1280" preserveAspectRatio="xMidYMid slice" aria-label="Solarpark zwischen Feldern aus der Luft">
+    <image class="im" href="assets/img/park-felder.jpg" width="1920" height="1280"/>
+    <g class="ov"><path d="M95 560v-40h40M1650 420h40v40M1690 690v40h-40M135 850h-40v-40"/><line x1="1690" y1="440" x2="1760" y2="380"/><text x="1500" y="364">Solarpark · Sensor-Hub aktiv</text></g>
+  </svg>
+  <header class="nav"><a class="brand" href="#"><svg viewBox="0 0 100 100"><g filter="url(#lb)"><circle cx="33" cy="62" r="22" fill="#F26938"/><circle cx="67" cy="60" r="22" fill="#0097B2"/><circle cx="50" cy="38" r="23" fill="#F38D03"/></g></svg>Nuno Labs</a><a href="#modell">Modell</a><a href="a2-direktvermarkter.html">Lösungen</a><a href="index.html">Entwürfe</a><a class="j" href="karriere-a.html">Join the team</a></header>
+  <p class="sub">Nuno Labs sagt voraus, was ein Solarpark in den nächsten Minuten liefert. Mit einer Kamera am Park, die jede Wolke kommen sieht.</p>
+  <h1 class="word">NOWCASTING</h1>
+</section>
+<section class="sec" id="modell">
+  <div class="tx"><h2 data-reveal>Die Kamera steht am Park und sieht den ganzen Himmel.</h2><p data-reveal>Ein Modell erkennt jede Wolke, verfolgt ihre Zugbahn und berechnet, wann ihr Schatten die Module trifft. Daraus wird eine Leistungsprognose je Viertelstunde, bis zwei Stunden voraus.</p></div>
+  <div class="ph cam"><div class="lens" data-lens></div></div>
+</section>
+<section class="prod"><img src="assets/img/wolke-sonne.jpg" alt="Wolke vor der Sonne" loading="lazy"><div><h3>Für Direktvermarkter<span>Die Rampe handeln, bevor sie im Zähler ankommt</span></h3><a href="a2-direktvermarkter.html">Mehr erfahren</a></div></section>
+<section class="prod"><img src="assets/img/park-weit.jpg" alt="Solarpark aus der Luft" loading="lazy"><div><h3>Für Netzbetreiber<span>Die Einspeisung der nächsten zwei Stunden, Park für Park</span></h3><a href="a2-netzbetreiber.html">Mehr erfahren</a></div></section>
+<section class="prod"><img src="assets/img/sonne-hinter-wolke.jpg" alt="Sonne hinter einer Wolke" loading="lazy"><div><h3>Für Batteriespeicher<span>Co-Location fahren, ohne Reserve zu verschenken</span></h3><a href="a2-batteriespeicher.html">Mehr erfahren</a></div></section>
+<p class="cred">Nuno Labs · TUM Spin-off, München · gefördert durch EXIST · hello@nuno-labs.de. Fotos: Platzhalter von Wikimedia Commons (Quellen in assets/img/QUELLEN.txt). Markierungen im Bild sind illustrativ.</p>
+<script src="assets/nuno.js"></script><script src="assets/sky.js"></script>
+</body>
+</html>

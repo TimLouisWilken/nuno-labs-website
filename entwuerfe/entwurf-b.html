@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nuno Labs – Entwurf B · Nacht</title>
+<link rel="icon" href="assets/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css">
+<style>
+:root{--pk-shadow:#000;--pk-shadow-o:.6;--bg:#0a0b0c;--card:#111314;--ink:#f3f1ed;--muted:#8a8780;--line:rgba(243,241,237,.1);--accent:#F26938;
+  --sky:#131617;--cloud:rgba(243,241,237,.78);--cloud-line:rgba(243,241,237,.45);--sky-line:rgba(243,241,237,.1);--sky-rim:rgba(243,241,237,.28);--vec:#f3f1ed}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+.mono{font:500 11.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1,h2{font-weight:600;letter-spacing:-.05em;line-height:.98;text-wrap:balance}
+h2{font-size:clamp(36px,5vw,68px)}
+.lead{font-size:clamp(17px,1.4vw,19.5px);color:var(--muted);letter-spacing:-.01em;max-width:30em;text-wrap:pretty}
+.btn{display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 24px;border-radius:10px;font-weight:500;font-size:15px;letter-spacing:-.01em;transition:.2s}
+.btn.light{background:var(--ink);color:var(--bg)}.btn.light:hover{background:#fff}
+.btn.line{box-shadow:inset 0 0 0 1px var(--line)}.btn.line:hover{box-shadow:inset 0 0 0 1px rgba(243,241,237,.4)}
+.btn svg{width:14px;height:14px;transition:transform .2s}.btn:hover svg{transform:translateX(3px)}
+
+/* feines Raster im Hintergrund */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:96px 96px;opacity:.35;mask-image:radial-gradient(ellipse at 50% 0,#000 0,transparent 70%)}
+
+.nav{position:sticky;top:0;z-index:20;background:rgba(10,11,12,.7);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;height:68px;gap:34px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:-.03em;font-size:17px}.brand svg{width:28px;height:28px}
+.nav nav{display:flex;gap:30px;margin-left:auto;font-size:14.5px;color:var(--muted)}.nav nav a:hover{color:var(--ink)}
+.nav .btn{height:40px;padding:0 16px;font-size:14px}
+
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;min-height:min(calc(100vh - 68px),880px);padding:56px 0 40px;position:relative}
+.hero h1{font-size:clamp(48px,7vw,108px);margin:26px 0 28px}
+.hero h1 span{color:var(--muted)}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:36px}
+.scope{position:relative;justify-self:end;width:min(560px,100%)}
+.scope .orbs{width:74%;right:-12%;top:-8%;--orb-blur:90px;--orb-o:.42}
+.scope [data-sky]{position:relative}
+.tag{position:absolute;display:grid;gap:7px;padding:12px 14px;border-radius:10px;background:rgba(17,19,20,.82);backdrop-filter:blur(10px);box-shadow:0 0 0 1px var(--line)}
+.tag b{font-size:22px;font-weight:600;letter-spacing:-.04em}.tag b em{font-style:normal;font-size:12px;font-weight:450;color:var(--muted);margin-left:4px;letter-spacing:0}
+.tag.t1{left:-4%;bottom:14%}.tag.t2{right:-2%;top:10%}
+.tag.t2 b{color:var(--accent)}
+
+.strip{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.strip div{padding:26px 28px;border-left:1px solid var(--line);display:grid;gap:12px}.strip div:first-child{border-left:0;padding-left:0}
+.strip b{font-size:clamp(28px,3.2vw,44px);font-weight:600;letter-spacing:-.05em;line-height:1}
+.strip p{font-size:14px;color:var(--muted);max-width:18em}
+
+section.block{padding:170px 0 0}
+.manifest{font-size:clamp(30px,5vw,72px);font-weight:600;letter-spacing:-.05em;line-height:1.04;max-width:17em}
+
+.split{display:grid;grid-template-columns:340px 1fr;gap:60px;align-items:start}
+.split .side{position:sticky;top:110px;display:grid;gap:22px}
+.panel{background:var(--card);border-radius:18px;box-shadow:0 0 0 1px var(--line);overflow:hidden}
+.p-top{display:flex;align-items:center;gap:18px;padding:16px 22px;border-bottom:1px solid var(--line)}
+.p-top .live{margin-left:auto;display:flex;align-items:center;gap:8px}.live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 1.8s infinite}
+@keyframes pulse{50%{opacity:.25}}
+.p-chart{padding:26px 22px 8px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.kpis div{padding:18px 22px;border-left:1px solid var(--line);display:grid;gap:10px}.kpis div:first-child{border-left:0}
+.kpis b{font-size:28px;font-weight:600;letter-spacing:-.04em}.kpis b em{font-style:normal;font-size:12px;font-weight:450;color:var(--muted);margin-left:5px;letter-spacing:0}
+.legend{display:flex;gap:22px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);padding:0 22px 20px 62px}
+.legend span{display:flex;align-items:center;gap:8px}.legend i{width:18px;height:2px;background:var(--ink)}.legend .f i{background:var(--accent)}.legend .n i{background:none;border-top:2px dotted var(--muted)}
+
+.steps{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);margin-top:64px}
+.steps article{padding:30px 30px 10px 0;border-left:1px solid var(--line);padding-left:30px;display:grid;gap:14px;align-content:start}.steps article:first-child{border-left:0;padding-left:0}
+.steps h3{font-size:24px;font-weight:600;letter-spacing:-.035em;line-height:1.1;margin-top:60px}
+.steps p{color:var(--muted);font-size:15.5px}
+
+.rows{border-top:1px solid var(--line);margin-top:60px}
+.row{display:grid;grid-template-columns:70px 1fr 1.1fr 40px;gap:24px;align-items:center;padding:34px 0;border-bottom:1px solid var(--line);position:relative;transition:padding .4s cubic-bezier(.2,.7,.2,1)}
+.row h3{font-size:clamp(26px,3.4vw,46px);font-weight:600;letter-spacing:-.045em;line-height:1;transition:color .3s}
+.row p{color:var(--muted);font-size:16px;max-width:32em}
+.row svg{width:18px;opacity:.35;transition:.3s}
+.row:hover{padding-left:18px}.row:hover svg{opacity:1;color:var(--accent);transform:translateX(4px)}
+.rows:hover .row:not(:hover) h3{color:var(--muted)}
+
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:60px}
+.person{position:relative;border-radius:18px;overflow:hidden;box-shadow:0 0 0 1px var(--line)}
+.person img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:grayscale(1) brightness(.82) contrast(1.08);transition:filter .5s,transform .8s cubic-bezier(.2,.7,.2,1)}
+.person:hover img{filter:none;transform:scale(1.03)}
+.person div{position:absolute;left:0;right:0;bottom:0;padding:60px 20px 18px;background:rgba(10,11,12,.0)}
+.person div::before{content:"";position:absolute;inset:auto 0 0 0;height:96px;background:rgba(10,11,12,.72);backdrop-filter:blur(8px);z-index:-1}
+.person div{z-index:1}.person h3{font-size:18px;font-weight:600;letter-spacing:-.03em}.person p{font-size:13.5px;color:var(--muted);margin-top:2px}
+
+.final{position:relative;margin-top:170px;padding:150px 0 130px;text-align:center;border-top:1px solid var(--line);overflow:hidden}
+.final .orbs{width:620px;left:50%;top:60px;transform:translateX(-50%);--orb-blur:100px;--orb-o:.5}
+.final h2{position:relative;font-size:clamp(44px,7.4vw,112px);max-width:10em;margin:0 auto 40px}
+.final .btn{position:relative}
+footer{display:flex;gap:28px;flex-wrap:wrap;align-items:center;padding:26px 0 40px;font-size:13.5px;color:var(--muted);border-top:1px solid var(--line)}footer .brand{color:var(--ink);margin-right:auto}
+
+@media(max-width:980px){.nav nav{display:none}.nav .btn{margin-left:auto}.hero{grid-template-columns:1fr;min-height:0}.scope{justify-self:center;width:min(440px,92%)}.strip{grid-template-columns:1fr 1fr}.strip div:nth-child(3){border-left:0;padding-left:0}.strip div:nth-child(n+3){border-top:1px solid var(--line)}.split{grid-template-columns:1fr;gap:34px}.split .side{position:static}.steps,.team{grid-template-columns:1fr}.steps article{border-left:0;padding-left:0;border-bottom:1px solid var(--line);padding-bottom:28px}.steps h3{margin-top:20px}.row{grid-template-columns:40px 1fr 24px}.row p{grid-column:2}.kpis{grid-template-columns:1fr 1fr}.kpis div:nth-child(3){border-left:0}.kpis div:nth-child(n+3){border-top:1px solid var(--line)}section.block{padding-top:110px}.legend{padding-left:22px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><filter id="lb" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3.2"/></filter>
+<symbol id="mark" viewBox="0 0 100 100"><g filter="url(#lb)"><circle cx="33" cy="62" r="22" fill="#F26938"/><circle cx="67" cy="60" r="22" fill="#0097B2"/><circle cx="50" cy="38" r="23" fill="#F38D03"/></g></symbol>
+<symbol id="arr" viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol></defs></svg>
+
+<header class="nav"><div class="wrap">
+  <a class="brand" href="#"><svg><use href="#mark"/></svg>Nuno Labs</a>
+  <nav><a href="#prognose">Prognose</a><a href="#technologie">Technologie</a><a href="#anwendungen">Anwendungen</a><a href="#team">Team</a><a href="karriere-b.html">Karriere</a><a href="index.html">Alle Entwürfe</a></nav>
+  <a class="btn light" href="mailto:hello@nuno-labs.de">Demo anfragen</a>
+</div></header>
+
+<div class="wrap">
+<section class="hero">
+  <div>
+    <span class="mono" data-reveal>Solar-Nowcasting · München</span>
+    <h1 data-reveal style="--d:.08s">Wolken sehen, <span>bevor sie den Park erreichen.</span></h1>
+    <p class="lead" data-reveal style="--d:.16s">Nuno Labs baut die Prognose-Infrastruktur für das Solarzeitalter: ein Sensor-Hub am Standort, ein KI-Modell dahinter, eine Kurzfristprognose für Handel und Netz.</p>
+    <div class="cta" data-reveal style="--d:.24s"><a class="btn light" href="mailto:hello@nuno-labs.de">Demo anfragen <svg><use href="#arr"/></svg></a><a class="btn line" href="#prognose">Prognose ansehen</a></div>
+  </div>
+  <div class="scope" data-sky-wrap data-reveal style="--d:.2s">
+    <div class="orbs"><i></i><i></i><i></i></div>
+    <div data-sky></div>
+    <div class="tag t1"><span class="mono">Wolkenzug</span><b class="num">243°<em>9,4 m/s</em></b></div>
+    <div class="tag t2"><span class="mono">Schatten in</span><b class="num"><span data-out="eta">07:40</span><em>min</em></b></div>
+  </div>
+</section>
+
+<div class="strip">
+  <div data-reveal><b class="num">15 min</b><p>So fein handelt der Strommarkt. So fein muss eine Prognose sein.</p></div>
+  <div data-reveal style="--d:.06s"><b class="num">0–2 h</b><p>Der Horizont, in dem Wettermodelle zu grob und Satelliten zu spät sind.</p></div>
+  <div data-reveal style="--d:.12s"><b class="num">5 min</b><p>Vor Lieferung schließt der Intraday-Handel. Bis dahin zählt jede Information.</p></div>
+  <div data-reveal style="--d:.18s"><b>1 Hub</b><p>Ein Sensor-Hub am Standort genügt. Kein Eingriff in die Anlage.</p></div>
+</div>
+
+<section class="block"><p class="manifest" data-words>Eine einzelne Wolke nimmt einem Solarpark in Sekunden die halbe Leistung. Kein Satellit sieht sie rechtzeitig. Unsere Kamera schon.</p></section>
+
+<section class="block" id="prognose">
+  <div class="split">
+    <div class="side"><span class="mono" data-reveal>Die Prognose</span><h2 data-reveal>Die Rampe steht im Fahrplan, bevor sie im Netz ankommt.</h2><p class="lead" data-reveal>Die Linie zeigt, was der Park liefert. Der orange Verlauf zeigt, was er gleich liefern wird, samt Unsicherheit.</p></div>
+    <div class="panel" data-chart-wrap data-reveal style="--d:.1s">
+      <div class="p-top"><span class="mono" style="color:var(--ink)">Solarpark Nord · 42 MWp</span><span class="mono num" data-out="time">11:00</span><span class="mono live">Live</span></div>
+      <div class="p-chart"><div data-chart></div></div>
+      <div class="legend"><span><i></i>Gemessen</span><span class="f"><i></i>Nuno-Prognose</span><span class="n"><i></i>Wettermodell</span><span style="margin-left:auto">Beispieldaten</span></div>
+      <div class="kpis">
+        <div><span class="mono">Jetzt</span><b class="num"><span data-out="now">38,2</span><em>MW</em></b></div>
+        <div><span class="mono">+15 min</span><b class="num"><span data-out="p15">36,0</span><em>MW</em></b></div>
+        <div><span class="mono">+30 min</span><b class="num"><span data-out="p30">31,4</span><em>MW</em></b></div>
+        <div><span class="mono">Rampe</span><b class="num" data-out="ramp">−6 %</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="technologie">
+  <span class="mono" data-reveal>Technologie</span>
+  <h2 data-reveal style="margin-top:22px;max-width:13em">Vom Himmelsbild zur Megawattzahl. Sehen Sie zu.</h2>
+  <div data-scene data-reveal style="margin-top:64px;--sc-bg:var(--card)"></div>
+</section>
+
+<section class="block" id="anwendungen">
+  <span class="mono" data-reveal>Anwendungen</span>
+  <h2 data-reveal style="margin-top:22px;max-width:12em">Für alle, die mit Solarstrom Entscheidungen treffen.</h2>
+  <div class="rows">
+    <a class="row" href="#" data-reveal><span class="mono">01</span><h3>Direktvermarkter</h3><p>Intraday-Positionen schließen, bevor die Rampe kommt. Weniger Ausgleichsenergie im Portfolio.</p><svg><use href="#arr"/></svg></a>
+    <a class="row" href="#" data-reveal><span class="mono">02</span><h3>Anlagenbetreiber</h3><p>Mehr Erlös aus demselben Park, weil die Prognose am Standort misst.</p><svg><use href="#arr"/></svg></a>
+    <a class="row" href="#" data-reveal><span class="mono">03</span><h3>Netzbetreiber</h3><p>Die Einspeisung der nächsten zwei Stunden kennen. Eine belastbare Grundlage für Redispatch.</p><svg><use href="#arr"/></svg></a>
+    <a class="row" href="#" data-reveal><span class="mono">04</span><h3>Batterie-Optimierer</h3><p>PV und Speicher am selben Netzanschluss gemeinsam fahren, mit einem Fahrplan, der hält.</p><svg><use href="#arr"/></svg></a>
+  </div>
+</section>
+
+<section class="block" id="team">
+  <span class="mono" data-reveal>Team · TU München, Cambridge, Stanford</span>
+  <h2 data-reveal style="margin-top:22px;max-width:13em">Mathematik, Robotik und Energiewirtschaft an einem Tisch.</h2>
+  <div class="team">
+    <div class="person" data-reveal><img src="assets/david.jpg" alt="David Dietz" loading="lazy"><div><h3>David Dietz</h3><p>Mathematics &amp; Management</p></div></div>
+    <div class="person" data-reveal style="--d:.08s"><img src="assets/benjamin.jpg" alt="Benjamin Obermeier" loading="lazy"><div><h3>Benjamin Obermeier</h3><p>Robotics, Cognition, Intelligence</p></div></div>
+    <div class="person" data-reveal style="--d:.16s"><img src="assets/naomi.jpg" alt="Naomi Jaguttis" loading="lazy"><div><h3>Naomi Jaguttis</h3><p>Management &amp; Sustainable Energies</p></div></div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="orbs"><i></i><i></i><i></i></div>
+  <h2 data-reveal>Die nächste Wolke kommt bestimmt.</h2>
+  <a class="btn light" href="mailto:hello@nuno-labs.de" data-reveal>Demo anfragen <svg><use href="#arr"/></svg></a>
+</section>
+<footer><a class="brand" href="#"><svg><use href="#mark"/></svg>Nuno Labs</a><span>TUM Spin-off · gefördert durch EXIST</span><a href="karriere-b.html">Karriere</a><a href="mailto:hello@nuno-labs.de">hello@nuno-labs.de</a><a href="https://www.linkedin.com/company/108688273/">LinkedIn</a><a href="https://nuno-labs.de/impressum">Impressum</a></footer>
+</div>
+<script src="assets/nuno.js"></script>
+</body>
+</html>
