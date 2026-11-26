@@ -54,6 +54,20 @@
 .hint{position:absolute;right:clamp(18px,2.6vw,38px);top:84px;z-index:5;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);transition:opacity .4s;display:flex;gap:10px;align-items:center}
 .hint::after{content:"";width:1px;height:26px;background:var(--ink);animation:nudge 1.6s ease-in-out infinite}@keyframes nudge{50%{transform:translateY(8px)}}
 
+.fcs{padding:clamp(70px,11vh,120px) 0 clamp(50px,8vh,90px)}
+.fcs-h{display:grid;grid-template-columns:200px minmax(0,1fr);gap:30px;border-top:1px solid var(--ink);padding-top:16px;margin-bottom:clamp(30px,5vh,52px)}
+.fcs-h small{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.fcs-h h2{font-size:clamp(26px,3.2vw,46px);font-weight:500;letter-spacing:-.035em;line-height:1.08;margin:0;max-width:16em}
+.fcs-b{margin-left:230px}
+.product{background:var(--card);border-radius:10px;box-shadow:0 0 0 1px var(--line);overflow:hidden;font-variant-numeric:tabular-nums}
+.p-top{display:flex;align-items:center;gap:14px;padding:13px 20px;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--muted)}.p-top strong{color:var(--ink);font-weight:500}
+.p-body{display:grid;grid-template-columns:1fr 230px}.p-chart{padding:22px 20px 12px}
+.legend{display:flex;gap:20px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);padding:6px 4px 6px 40px}
+.legend span{display:flex;align-items:center;gap:8px}.legend i{width:18px;height:2px;background:var(--ink)}.legend .f i{background:var(--accent)}.legend .n i{background:none;border-top:2px dotted var(--muted)}
+.p-side{border-left:1px solid var(--line);display:grid}.kpi{padding:14px 20px;border-bottom:1px solid var(--line)}.kpi:last-child{border:0}
+.kpi small{display:block;font-size:12.5px;color:var(--muted);margin-bottom:3px}.kpi b{font-size:26px;font-weight:500;letter-spacing:-.04em}.kpi b em{font-style:normal;font-size:13px;color:var(--muted);margin-left:5px;letter-spacing:0}
+.note{font-size:12.5px;color:var(--muted);margin-top:12px}
+@media(max-width:980px){.fcs-h{grid-template-columns:1fr;gap:10px}.fcs-b{margin-left:0}.p-body{grid-template-columns:1fr}.p-side{border-left:0;border-top:1px solid var(--line);grid-template-columns:1fr 1fr}.legend{padding-left:4px}}
 .wrap{max-width:1320px;margin:0 auto;padding:0 clamp(20px,3vw,44px)}
 .say{padding:clamp(90px,14vh,160px) 0 clamp(60px,9vh,100px);display:grid;grid-template-columns:1.2fr .8fr;gap:40px}
 .say h2{font-size:clamp(28px,3.4vw,50px);font-weight:500;letter-spacing:-.035em;line-height:1.08;margin:0}
@@ -125,6 +139,21 @@
     <div data-reveal style="--d:.08s"><div class="ph"><img src="assets/img/sonne-hinter-wolke.jpg" alt="Sonne hinter einer Wolke" loading="lazy" style="object-position:50% 50%"></div><small>Modell</small><h3>Aus Wolken werden Megawatt.</h3><p>Das Modell erkennt jede Wolke, verfolgt ihre Zugbahn und berechnet, wann ihr Schatten die Module trifft.</p></div>
     <div data-reveal style="--d:.16s"><div class="ph"><img src="assets/img/park-weit.jpg" alt="Solarpark aus der Luft" loading="lazy" style="object-position:50% 80%"></div><small>Prognose</small><h3>Die Zahl kommt dort an, wo Sie entscheiden.</h3><p>Leistung je Viertelstunde, bis zwei Stunden voraus, per API in Ihr Handels- oder Leitsystem.</p></div>
   </div>
+  <section class="fcs">
+    <div class="fcs-h"><small data-reveal>Die Prognose</small><h2 data-reveal>So sieht eine Rampe aus, wenn man sie kommen sieht.</h2></div>
+    <div class="fcs-b"><div class="product" data-chart-wrap data-reveal>
+      <div class="p-top"><strong>Solarpark Nord</strong><span>42 MWp</span><span data-out="time">11:00</span></div>
+      <div class="p-body">
+        <div class="p-chart"><div data-chart></div><div class="legend"><span><i></i>Gemessen</span><span class="f"><i></i>Nuno-Prognose</span><span class="n"><i></i>Wettermodell</span></div></div>
+        <div class="p-side">
+          <div class="kpi"><small>Leistung jetzt</small><b><span data-out="now">38,2</span><em>MW</em></b></div>
+          <div class="kpi"><small>In 15 Minuten</small><b><span data-out="p15">36,0</span><em>MW</em></b></div>
+          <div class="kpi"><small>In 30 Minuten</small><b><span data-out="p30">31,4</span><em>MW</em></b></div>
+          <div class="kpi"><small>Rampe (15 min)</small><b data-out="ramp">−6 %</b></div>
+        </div>
+      </div>
+    </div><p class="note">Beispieldaten zur Illustration.</p></div>
+  </section>
   <figure class="band"><div class="ph"><img src="assets/img/park-felder.jpg" alt="Solarpark zwischen Feldern aus der Luft" loading="lazy" style="object-position:50% 62%"></div><figcaption><span>Ein Solarpark zwischen Feldern</span><span>Foto: Platzhalter</span></figcaption></figure>
   <section class="sol" id="loesungen"><h2 data-reveal>Vier Branchen, eine Frage: Was liefert die Sonne gleich?</h2><div><a class="lrow" href="direktvermarkter.html" data-reveal><small>Handel</small><h3>Direktvermarkter</h3><p>Handeln Sie die Rampe, statt sie als Ausgleichsenergie zu bezahlen.</p><svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="lrow" href="anlagenbetreiber.html" data-reveal><small>Erzeugung</small><h3>Anlagenbetreiber</h3><p>Derselbe Park, besser prognostiziert, besser vermarktet.</p><svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="lrow" href="netzbetreiber.html" data-reveal><small>Netz</small><h3>Netzbetreiber</h3><p>Die Einspeisung der nächsten zwei Stunden, Park für Park.</p><svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="lrow" href="batteriespeicher.html" data-reveal><small>Speicher</small><h3>Batteriespeicher</h3><p>Co-Location fahren, als wüssten Sie, was die Sonne vorhat.</p><svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></section>
   <section class="end"><h2>Sehen Sie die Prognose an einem Ihrer eigenen Parks.</h2><a class="btn" href="mailto:hello@nuno-labs.de">Demo anfragen</a></section>
@@ -153,12 +182,14 @@
   /* Zeitachse des Diagramms in Minuten: 20 min Rückblick, 120 min Prognose. Die ganze Szene dauert 25 min. */
   const MIN = 25, BACK = 20, AHEAD = 120;
   const bump = (u, a, b, e) => ss(a, a + e, u) * (1 - ss(b - e, b, u));
-  const DIPS = [[C[3].t0 * MIN, C[3].t1 * MIN, .7, 1.75], [58, 66, .42, 2.5], [84, 101, .62, 3.5], [126, 133, .38, 2.5]];
-  const clr = u => 1 - .0000042 * u * u;
-  const later = u => { let s = 0; for (const d of DIPS) s += d[2] * bump(u, d[0], d[1], d[3]); return s; };
-  const first = (u, sharp) => { const a = C[1].t0 * MIN, b = C[1].t1 * MIN; return sharp * .7 * bump(u, a, b, 1.75) + (1 - sharp) * .3 * bump(u, a - 4, b + 4, 5); };
-  const fore = (u, sharp) => PMAX * clr(u) * (1 - Math.min(.8, first(u, sharp) + later(u)));
-  const power = p => fore(p * MIN, 1) + .25 * Math.sin(p * 90) + .15 * Math.sin(p * 37);
+  /* weiche Rampen wie im großen Diagramm weiter unten; der erste Einbruch (Wolke 02) steht von Anfang an fest */
+  const bell = (u, c) => .7 * Math.exp(-((u - (c.t0 + c.t1) / 2 * MIN) ** 2) / (2 * 2.1 * 2.1));
+  const DIPS = [[42, .2, 3], [61, .44, 4.5], [93, .6, 7], [127, .3, 4.5]];
+  const clr = u => 1 - .0000042 * u * u + .018 * Math.sin(u / 11) + .012 * Math.sin(u / 4.3 + 1);
+  const later = u => { let s = bell(u, C[3]); for (const d of DIPS) s += d[1] * Math.exp(-((u - d[0]) ** 2) / (2 * d[2] * d[2])); return s; };
+  const first = u => bell(u, C[1]);
+  const fore = u => PMAX * clr(u) * (1 - Math.min(.8, first(u) + later(u)));
+  const power = p => fore(p * MIN) + .25 * Math.sin(p * 90) + .15 * Math.sin(p * 37);
   const gx = tau => 4 + 312 * (tau + BACK) / (BACK + AHEAD), gy = v => 78 - (v / 42) * 70;
   { let h = ''; [[0, 'jetzt', 'middle'], [30, '+30 min', 'middle'], [60, '+1 h', 'middle'], [90, '+1,5 h', 'middle'], [120, '+2 h', 'end']].forEach(([m, l, an]) => { const x = gx(m).toFixed(1); if (m) h += `<line class="tk" x1="${x}" x2="${x}" y1="8" y2="82"/>`; h += `<text x="${x}" y="95" text-anchor="${an}">${l}</text>`; }); $('ax').innerHTML = h; }
   const copy = [...document.querySelectorAll('#copy>div')], bounds = [.12, .44, 2];
@@ -212,10 +243,10 @@
     const sec = 12 * 3600 + 14 * 60 + Math.round(p * 1500); $('clk').textContent = [sec / 3600 | 0, (sec / 60 | 0) % 60, sec % 60].map(v => String(v).padStart(2, '0')).join(':'); $('cnt').textContent = n;
     pan.forEach((e, i) => { e.style.opacity = (1 - .82 * cover(p - .05 + i / 27 * .1)).toFixed(2); });
     /* Diagramm: links gemessen, rechts die Prognose bis zwei Stunden voraus. Die Kurve wandert mit der Zeit nach links. */
-    let m = '', f = '', up = '', dn = ''; const now = p * MIN, sharp = ss(a.cls, a.cls + .05, p);
+    let m = '', f = '', up = '', dn = ''; const now = p * MIN;
     for (let tau = -BACK; tau < 0; tau += .5) m += (m ? 'L' : 'M') + gx(tau).toFixed(1) + ' ' + gy(power((now + tau) / MIN)).toFixed(1);
     const y0 = gy(power(p)).toFixed(1), x0 = gx(0).toFixed(1); m += 'L' + x0 + ' ' + y0; f = 'M' + x0 + ' ' + y0;
-    for (let tau = .5; tau <= AHEAD + .01; tau += .5) { const v = fore(now + tau, sharp), w = .3 + 2.7 * tau / AHEAD, x = gx(tau).toFixed(1);
+    for (let tau = .5; tau <= AHEAD + .01; tau += .5) { const v = fore(now + tau), w = .3 + 2.7 * tau / AHEAD, x = gx(tau).toFixed(1);
       f += 'L' + x + ' ' + gy(v).toFixed(1); up += 'L' + x + ' ' + gy(Math.min(41.5, v + w)).toFixed(1); dn = 'L' + x + ' ' + gy(Math.max(2, v - w)).toFixed(1) + dn; }
     $('me').setAttribute('d', m); $('fc').setAttribute('d', f); $('bd').setAttribute('d', 'M' + x0 + ' ' + y0 + up + dn + 'Z');
     $('nowl').setAttribute('x1', x0); $('nowl').setAttribute('x2', x0); $('dot').setAttribute('cx', x0); $('dot').setAttribute('cy', y0);
