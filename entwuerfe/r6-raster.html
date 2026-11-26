@@ -117,7 +117,6 @@
       <a class="brand" href="#"><svg viewBox="0 0 100 100"><g filter="url(#lb)"><circle cx="33" cy="62" r="22" fill="#F26938"/><circle cx="67" cy="60" r="22" fill="#0097B2"/><circle cx="50" cy="38" r="23" fill="#F38D03"/></g></svg>Nuno Labs</a>
       <a href="r6-technik.html">Technik</a><div class="dd" tabindex="0"><span>Lösungen</span><div><a href="r6-direktvermarkter.html">Direktvermarkter</a><a href="r6-anlagenbetreiber.html">Anlagenbetreiber</a><a href="r6-netzbetreiber.html">Netzbetreiber</a><a href="r6-batteriespeicher.html">Batteriespeicher</a></div></div><a href="r6-team.html">Team</a><a href="r6-karriere.html">Karriere</a><a href="index.html">Alle Entwürfe</a><a class="cta" href="mailto:hello@nuno-labs.de">Demo anfragen</a><details class="mm"><summary>Menü</summary><div><a href="r6-technik.html">Technik</a><a href="r6-direktvermarkter.html">Direktvermarkter</a><a href="r6-anlagenbetreiber.html">Anlagenbetreiber</a><a href="r6-netzbetreiber.html">Netzbetreiber</a><a href="r6-batteriespeicher.html">Batteriespeicher</a><a href="r6-team.html">Team</a><a href="r6-karriere.html">Karriere</a></div></details>
     </header>
-    <div class="meta"><span>Himmelskamera · <b>Sichtfeld</b></span><span>Zeit <b id="clk">12:14:00</b></span><span>Erfasst <b id="cnt">0</b></span></div>
     <span class="hint" id="hint">Scrollen lässt die Zeit laufen</span>
     <div class="copy" id="copy">
       <div><small>Nuno Labs · Solar-Nowcasting</small><h1>Wir sagen bis zu zwei Stunden voraus, was Ihr Solarpark liefert.</h1></div>
@@ -247,7 +246,7 @@
     const k = bounds.findIndex(v => p < v); copy.forEach((d, i) => d.classList.toggle('on', i === k));
     $('hint').style.opacity = p < .03 ? 1 : 0; $('bar').style.transform = 'scaleX(' + p.toFixed(4) + ')';
     $('mw').textContent = power(p).toFixed(1).replace('.', ',');
-    const sec = 12 * 3600 + 14 * 60 + Math.round(p * 1500); $('clk').textContent = [sec / 3600 | 0, (sec / 60 | 0) % 60, sec % 60].map(v => String(v).padStart(2, '0')).join(':'); $('cnt').textContent = n;
+    
     pan.forEach((e, i) => { e.style.opacity = (1 - .82 * cover(p - .05 + i / 27 * .1)).toFixed(2); });
     /* Diagramm: links gemessen, rechts die Prognose bis zwei Stunden voraus. Die Kurve wandert mit der Zeit nach links. */
     let m = '', f = '', up = '', dn = ''; const now = p * MIN;
